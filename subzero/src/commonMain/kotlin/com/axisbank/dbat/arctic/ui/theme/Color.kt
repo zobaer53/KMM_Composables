@@ -1,0 +1,190 @@
+package com.axisbank.dbat.arctic.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+
+val md_theme_light_primary = Color(0xFFAD295D)
+val md_theme_light_onPrimary = Color(0xFFFFFFFF)
+val md_theme_light_primaryContainer = Color(0xFFFFD9E1)
+val md_theme_light_onPrimaryContainer = Color(0xFF3F001B)
+val md_theme_light_secondary = Color(0xFFBC004C)
+val md_theme_light_onSecondary = Color(0xFFFFFFFF)
+val md_theme_light_secondaryContainer = Color(0xFFFFD9DE)
+val md_theme_light_onSecondaryContainer = Color(0xFF3F0015)
+val md_theme_light_tertiary = Color(0xFF7C5734)
+val md_theme_light_onTertiary = Color(0xFFFFFFFF)
+val md_theme_light_tertiaryContainer = Color(0xFFFFDCC0)
+val md_theme_light_onTertiaryContainer = Color(0xFF2D1600)
+val md_theme_light_error = Color(0xFFBA1A1A)
+val md_theme_light_errorContainer = Color(0xFFFFDAD6)
+val md_theme_light_onError = Color(0xFFFFFFFF)
+val md_theme_light_onErrorContainer = Color(0xFF410002)
+val md_theme_light_background = Color(0xFFFFFBFF)
+val md_theme_light_onBackground = Color(0xFF201A1B)
+val md_theme_light_surface = Color(0xFFFFFBFF)
+val md_theme_light_onSurface = Color(0xFF201A1B)
+val md_theme_light_surfaceVariant = Color(0xFFF3DDE1)
+val md_theme_light_onSurfaceVariant = Color(0xFF514346)
+val md_theme_light_outline = Color(0xFF847376)
+val md_theme_light_inverseOnSurface = Color(0xFFFAEEEF)
+val md_theme_light_inverseSurface = Color(0xFF352F30)
+val md_theme_light_inversePrimary = Color(0xFFFFB1C5)
+val md_theme_light_shadow = Color(0xFF000000)
+val md_theme_light_surfaceTint = Color(0xFFAD295D)
+val md_theme_light_outlineVariant = Color(0xFFD6C2C5)
+val md_theme_light_scrim = Color(0xFF000000)
+
+val md_theme_dark_primary = Color(0xFFFFB1C5)
+val md_theme_dark_onPrimary = Color(0xFF650030)
+val md_theme_dark_primaryContainer = Color(0xFF8D0746)
+val md_theme_dark_onPrimaryContainer = Color(0xFFFFD9E1)
+val md_theme_dark_secondary = Color(0xFFFFB2BE)
+val md_theme_dark_onSecondary = Color(0xFF660026)
+val md_theme_dark_secondaryContainer = Color(0xFF900039)
+val md_theme_dark_onSecondaryContainer = Color(0xFFFFD9DE)
+val md_theme_dark_tertiary = Color(0xFFEEBD93)
+val md_theme_dark_onTertiary = Color(0xFF472A0A)
+val md_theme_dark_tertiaryContainer = Color(0xFF613F1F)
+val md_theme_dark_onTertiaryContainer = Color(0xFFFFDCC0)
+val md_theme_dark_error = Color(0xFFFFB4AB)
+val md_theme_dark_errorContainer = Color(0xFF93000A)
+val md_theme_dark_onError = Color(0xFF690005)
+val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
+val md_theme_dark_background = Color(0xFF201A1B)
+val md_theme_dark_onBackground = Color(0xFFECE0E1)
+val md_theme_dark_surface = Color(0xFF201A1B)
+val md_theme_dark_onSurface = Color(0xFFECE0E1)
+val md_theme_dark_surfaceVariant = Color(0xFF514346)
+val md_theme_dark_onSurfaceVariant = Color(0xFFD6C2C5)
+val md_theme_dark_outline = Color(0xFF9E8C90)
+val md_theme_dark_inverseOnSurface = Color(0xFF201A1B)
+val md_theme_dark_inverseSurface = Color(0xFFECE0E1)
+val md_theme_dark_inversePrimary = Color(0xFFAD295D)
+val md_theme_dark_shadow = Color(0xFF000000)
+val md_theme_dark_surfaceTint = Color(0xFFFFB1C5)
+val md_theme_dark_outlineVariant = Color(0xFF514346)
+val md_theme_dark_scrim = Color(0xFF000000)
+
+
+val seed = Color(0xFF97144D)
+
+val sz_color_action_primary = Color(0xFF97144D)
+val sz_color_action_secondary = Color(0xFFED1164)
+val sz_color_action_tertiary = Color(0xFF12877F)
+
+val sz_color_surface_primary = Color(0xFFFFFFFF)
+val sz_color_surface_secondary = Color(0xFFF9F9F9)
+val sz_color_surface_tertiary = Color(0xFF404040)
+val sz_color_surface_background = Color(0xFFFFFFFF)
+
+
+val sz_color_typo_primary = Color(0xFF282828)
+val sz_color_typo_secondary = Color(0xFF6E6E6E)
+val sz_color_typo_tertiary = Color(0xFF9D9D9D)
+val sz_color_typo_action_primary = Color(0xFF97144D)
+val sz_color_typo_action_secondary = Color(0xFFED1164)
+val sz_color_typo_action_tertiary = Color(0xFF12877F)
+val sz_color_typo_on_surface = Color(0xFFFFFFFF)
+val sz_color_typo_disabled = Color(0xFFB4B4B4)
+
+
+val sz_color_neutral_1 = Color(0xFFF1F4F7)
+val sz_color_neutral_2 = Color(0xFFEBF9F8)
+val sz_color_neutral_3 = Color(0xFFEBF0F9)
+val sz_color_neutral_4 = Color(0xFFF4EBF9)
+val sz_color_neutral_5 = Color(0xFFF9F6EB)
+val sz_color_neutral_6 = Color(0xFFB8DDDB)
+
+
+val sz_color_icon_negative = Color(0xFFEB0000)
+val sz_color_icon_positive = Color(0xFF278829)
+val sz_color_icon_warning = Color(0xFFD84008)
+val sz_color_icon_action_primary = Color(0xFF97144D)
+val sz_color_icon_action_secondary = Color(0xFFED1164)
+val sz_color_icon_action_tertiary = Color(0xFF12877F)
+val sz_color_icon_on_surface = Color(0xFFFFFFFF)
+val sz_color_icon_disabled = Color(0xFFB4B4B4)
+val sz_color_icon_default = Color(0xFF404040)
+
+
+val sz_color_stroke_default = Color(0xFFE2E2E2)
+val sz_color_stroke_selected = Color(0xFFF14687)
+val sz_color_stroke_hover = Color(0xFFFDE5EE)
+val sz_color_stroke_disabled = Color(0xFFB4B4B4)
+val sz_color_stroke_active = Color(0xFF404040)
+val sz_color_stroke_secondary_selected = Color(0xFF81C1BD)
+
+
+val sz_color_support_negative = Color(0xFFEB0000)
+val sz_color_support_positive = Color(0xFF278829)
+val sz_color_support_warning = Color(0xFFD84008)
+val sz_color_support_variable = Color(0xFF145599)
+val sz_color_support_default = Color(0xFF165964)
+val sz_color_support_negative_neutral = Color(0xFFF9EBEF)
+val sz_color_support_positive_neutral = Color(0xFFEFF9EB)
+val sz_color_support_warning_neutral = Color(0xFFF9F1EB)
+val sz_color_support_typical_neutral = Color(0xFFE3F5F8)
+
+
+val sz_color_state_disabled_surface = Color(0xFFF1F1F1)
+val sz_color_state_disabled_typo = Color(0xFFB4B4B4)
+val sz_color_state_selected_hover_and_focus = Color(0xFF14F14687)
+val sz_color_state_selected_pressed = Color(0xFFF9B0CC)
+val sz_color_state_visited_text_link = Color(0xFF9911ED)
+val sz_color_state_secondary_hover = Color(0xFFF3FBFB)
+val sz_color_state_secondary_pressed = Color(0xFFE6F8F4)
+val sz_color_state_unselected_default = Color(0xFFB4B4B4)
+val sz_color_state_unselected_hover = Color(0xFF1FB4B4B4)
+val sz_color_state_unselected_pressed = Color(0xFF29B4B4B4)
+
+
+val sz_color_overlay = Color(0xFF80000000)
+
+
+val ripple_color = Color(0xFF33ED1164)
+
+
+val sz_colour_datavis_1 = Color(0xFFC578D3)
+val sz_colour_datavis_2 = Color(0xFFD84646)
+val sz_colour_datavis_3 = Color(0xFF5273CC)
+val sz_colour_datavis_4 = Color(0xFFD87D23)
+val sz_colour_datavis_5 = Color(0xFF29A597)
+val sz_colour_datavis_6 = Color(0xFF2750C2)
+val sz_colour_datavis_7 = Color(0xFFA03333)
+
+
+val sz_colour_datavis_1_1 = Color(0xFF692675)
+val sz_colour_datavis_1_2 = Color(0xFF9636A7)
+val sz_colour_datavis_1_3 = Color(0xFFB757C8)
+val sz_colour_datavis_1_4 = Color(0xFFC578D3)
+val sz_colour_datavis_1_5 = Color(0xFFCD8AD9)
+val sz_colour_datavis_1_6 = Color(0xFFD9A5E2)
+val sz_colour_datavis_1_7 = Color(0xFFE4C0EB)
+
+
+val sz_colour_datavis_2_1 = Color(0xFF6E1717)
+val sz_colour_datavis_2_2 = Color(0xFF9D2121)
+val sz_colour_datavis_2_3 = Color(0xFFCC2B2B)
+val sz_colour_datavis_2_4 = Color(0xFFD84646)
+val sz_colour_datavis_2_5 = Color(0xFFDD5F5F)
+val sz_colour_datavis_2_6 = Color(0xFFE58484)
+val sz_colour_datavis_2_7 = Color(0xFFEDA9A9)
+
+
+val sz_colour_datavis_5_1 = Color(0xFF134C45)
+val sz_colour_datavis_5_2 = Color(0xFF1B6D63)
+val sz_colour_datavis_5_3 = Color(0xFF238D81)
+val sz_colour_datavis_5_4 = Color(0xFF29A597)
+val sz_colour_datavis_5_5 = Color(0xFF31C4B3)
+val sz_colour_datavis_5_6 = Color(0xFF5CD6C8)
+val sz_colour_datavis_5_7 = Color(0xFF8DE2D8)
+
+
+val sz_colour_datavis_6_1 = Color(0xFF12265B)
+val sz_colour_datavis_6_2 = Color(0xFF1A3683)
+val sz_colour_datavis_6_3 = Color(0xFF2246AA)
+val sz_colour_datavis_6_4 = Color(0xFF2750C2)
+val sz_colour_datavis_6_5 = Color(0xFF3862D8)
+val sz_colour_datavis_6_6 = Color(0xFF6686E1)
+val sz_colour_datavis_6_7 = Color(0xFF94ABEA)
+
