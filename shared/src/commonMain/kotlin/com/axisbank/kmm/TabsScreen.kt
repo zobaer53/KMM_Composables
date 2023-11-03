@@ -43,6 +43,7 @@ import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_6
 import com.axisbank.dbat.arctic.ui.theme.sz_color_stroke_secondary_selected
 import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_primary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
+import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_deepFreeze
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
@@ -50,7 +51,7 @@ import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_cold
 import com.axisbank.kmm.TabSampleData
 import com.axisbank.kmm.TabSampleScrollableData
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
     val tabSampleData = TabSampleData()
@@ -81,7 +82,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
-                    .padding(20.dp)
+                    .padding(sz_spacing_cool)
             ) {
                 Column {
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
@@ -113,7 +114,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedTabIndexEnabled = index
                                 },
                                 enabled = true,
-                                modifier = Modifier.padding(horizontal = 8.dp),
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial),
                                 selectedContentColor = LightColors.primary
                             ) {
                                 Text(tabTitle,
@@ -150,7 +151,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 selected =  false,
                                 onClick = {},
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal = 8.dp)
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial)
                             ) {
                                 Text(tabTitle,
                                     color = if(selectedTabIndexDisabled == index){
@@ -187,7 +188,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                           containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal = 8.dp) then
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial) then
                                         Modifier.border(
                                             width = 1.dp,
                                             color = Color.Gray,
@@ -203,7 +204,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     if (themeViewModel.isDarkMode) {
                                         Color.White
                                     } else sz_color_typo_action_tertiary
-                                } else Color.Gray, modifier = Modifier.padding(5.dp))
+                                } else Color.Gray, modifier = Modifier.padding(sz_spacing_quickFreeze))
                             }
                         }
                     }
@@ -237,9 +238,9 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal = 8.dp)
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial)
                             ) {
-                                Text(tabTitle, modifier = Modifier.padding(5.dp), color = Color.Gray)
+                                Text(tabTitle, modifier = Modifier.padding(sz_spacing_quickFreeze), color = Color.Gray)
                             }
                         }
                     }
@@ -274,19 +275,19 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedTabIndexEnabledWithAssets = index
                                 },
                                 enabled = true,
-                                modifier = Modifier.padding(horizontal = 8.dp),
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial),
                                 selectedContentColor = LightColors.primary
                             ) {
                                 Row {
-                                    Text(tabTitle,modifier = Modifier.padding(5.dp),
+                                    Text(tabTitle,modifier = Modifier.padding(sz_spacing_quickFreeze),
                                         color = if(selectedTabIndexEnabledWithAssets == index){
                                             LightColors.primary
                                         }else Color.Gray)
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
                                         imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                         contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier.padding(5.dp) // Adjust size as needed
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze) // Adjust size as needed
                                     )
                                 }
 
@@ -323,7 +324,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal = 8.dp) then
+                                modifier = Modifier.padding(horizontal =sz_spacing_glacial) then
                                         Modifier.border(
                                             width = 1.dp,
                                             color = Color.Gray,
@@ -339,13 +340,13 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             if (themeViewModel.isDarkMode) {
                                                 sz_color_typo_action_tertiary
                                             } else  Color.White
-                                        } else Color.Gray, modifier = Modifier.padding(5.dp)
+                                        } else Color.Gray, modifier = Modifier.padding(sz_spacing_quickFreeze)
                                     )
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
                                         imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                         contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier.padding(5.dp) // Adjust size as needed
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze) // Adjust size as needed
                                     )
                                 }
                             }
@@ -383,17 +384,17 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                       containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal = 8.dp)
+                                modifier = Modifier.padding(horizontal =sz_spacing_glacial)
                             ) {
                                 Row {
                                     Text(
-                                        tabTitle, modifier = Modifier.padding(5.dp),color = Color.Gray
+                                        tabTitle, modifier = Modifier.padding(sz_spacing_quickFreeze),color = Color.Gray
                                     )
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
                                         imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                         contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier.padding(5.dp) // Adjust size as needed
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze) // Adjust size as needed
                                     )
                                 }
                             }
@@ -423,7 +424,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         selectedScrollableTabIndexEnabled = index
                                     },
                                     enabled = true,
-                                    modifier = Modifier.padding(horizontal = 8.dp) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
                                         brush = if (selectedScrollableTabIndexEnabled == index) SolidColor(LightColors.primary) else SolidColor(Color.Transparent) // Brush parameter
@@ -431,7 +432,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedContentColor = if (selectedScrollableTabIndexEnabled == index)LightColors.primary else Color.Transparent
                                 ) {
                                     Text(tabTitle, Modifier
-                                        .padding(start = 20.dp, top = 5.dp, end = 20.dp, bottom = 5.dp),
+                                        .padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_cool, bottom = sz_spacing_quickFreeze),
                                         color= Color.Gray
                                         )
                                 }
@@ -462,14 +463,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         //selectedScrollableTabIndexEnabled = index
                                     },
                                     enabled = false,
-                                    modifier = Modifier.padding(horizontal = 8.dp) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
                                         brush =SolidColor(Color.Transparent) // Brush parameter
                                     ),
                                     selectedContentColor =Color.Gray
                                 ) {
-                                    Text(tabTitle, Modifier.padding(start = 20.dp, top = 5.dp, end = 20.dp, bottom = 5.dp),color = Color.Gray)
+                                    Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_cool, bottom = sz_spacing_quickFreeze),color = Color.Gray)
                                 }
                             }
                         }
@@ -498,7 +499,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         scrolledContainerTabIndexEnabledWithAssets = index
                                     },
                                     enabled = true,
-                                    modifier = Modifier.padding(horizontal = 8.dp) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
                                         brush = if (scrolledContainerTabIndexEnabledWithAssets == index) SolidColor(LightColors.primary) else SolidColor(Color.Transparent) // Brush parameter
@@ -510,14 +511,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedContentColor = if (selectedScrollableTabIndexEnabled == index)LightColors.primary else Color.Transparent
                                 ) {
                                     Row{
-                                        Text(tabTitle, Modifier.padding(start = 20.dp, top = 5.dp, end = 5.dp, bottom = 5.dp),
+                                        Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_quickFreeze, bottom = sz_spacing_quickFreeze),
                                             color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
                                                 sz_color_typo_action_tertiary
                                             } else Color.Gray)
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content description
-                                            modifier = Modifier.padding(5.dp) // Adjust size as needed
+                                            modifier = Modifier.padding(sz_spacing_quickFreeze) // Adjust size as needed
                                         )
                                     }
                                 }
@@ -548,7 +549,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         //scrolledContainerTabIndexEnabledWithAssets = index
                                     },
                                     enabled = false,
-                                    modifier = Modifier.padding(horizontal = 8.dp) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
                                         brush =SolidColor(Color.Transparent) // Brush parameter
@@ -557,11 +558,11 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedContentColor =Color.Transparent
                                 ) {
                                     Row{
-                                        Text(tabTitle, Modifier.padding(start = 20.dp, top = 5.dp, end = 5.dp, bottom = 5.dp),color = Color.Gray)
+                                        Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_quickFreeze, bottom =sz_spacing_quickFreeze),color = Color.Gray)
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content description
-                                            modifier = Modifier.padding(5.dp) // Adjust size as needed
+                                            modifier = Modifier.padding(sz_spacing_quickFreeze) // Adjust size as needed
                                         )
                                     }
                                 }
