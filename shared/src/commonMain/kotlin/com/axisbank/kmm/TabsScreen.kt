@@ -51,7 +51,6 @@ import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze_1
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frigid
-import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frostbite
 import com.axisbank.kmm.TabSampleData
 import com.axisbank.kmm.TabSampleScrollableData
 
@@ -593,7 +592,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                 color = if (defaultScrolledTabIndexEnabledWithAssets == index) {
                                                     LightColors.primary
                                                 } else Color.Gray,
-                                                fontSize = sz_typo_font_size_frostbite,
+                                                fontSize = sz_typo_font_size_frigid,
                                                 modifier = Modifier
                                                     .padding(
                                                         start = sz_spacing_cool,
@@ -664,7 +663,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             tabTitle, color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
                                                 sz_color_typo_action_tertiary
                                             } else Color.Gray,
-                                            fontSize = sz_typo_font_size_frostbite,
+                                            fontSize = sz_typo_font_size_frigid,
                                             modifier =  Modifier
                                                 .padding(start =sz_spacing_cool,
                                                     top =sz_spacing_frostbite,
@@ -721,7 +720,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     Row{
                                         Text(tabTitle,
                                             color = Color.Gray,
-                                            fontSize = sz_typo_font_size_frostbite,
+
+                                            fontSize = sz_typo_font_size_frigid,
                                             modifier =  Modifier
                                                 .padding(start =sz_spacing_cool,
                                                     top =sz_spacing_frostbite,
