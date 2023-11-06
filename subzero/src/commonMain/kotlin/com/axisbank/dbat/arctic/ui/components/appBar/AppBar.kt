@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,13 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.ViewModel
 import com.axisbank.dbat.arctic.ui.theme.AppColors
-import com.axisbank.dbat.arctic.ui.theme.LocalColors
 import com.axisbank.dbat.arctic.ui.theme.ThemeViewModel
-import com.axisbank.dbat.arctic.ui.theme.primaryBrandColor
 import com.axisbank.dbat.arctic.ui.theme.sz_color_action_primary
-import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_primary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_secondary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_on_surface
@@ -65,7 +60,7 @@ fun AppBar(
             Icon(imageVector = Icons.Outlined.Refresh, contentDescription = "Lock")
         }
         IconButton(onClick = {
-            isDarkMode1.toggleDarkMode()
+            //isDarkMode1.toggleDarkMode()
 
         }) {
             Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")

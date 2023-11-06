@@ -59,11 +59,11 @@ fun AppTheme(
 
 
     MaterialTheme(
-        colors = if (!useDarkSelected) {
+        colors = //if (!useDarkSelected) {
             LightColors
-        } else {
+        /*} else {
             DarkColors
-        },
+        }*/,
         content = content
     )
 }

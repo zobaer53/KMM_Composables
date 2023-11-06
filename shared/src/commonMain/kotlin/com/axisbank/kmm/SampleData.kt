@@ -9,11 +9,11 @@ class DropdownSampleData {
 // Shared code
 class TabSampleData() {
     fun getSampleItems(): List<String> {
-        return listOf("Tabs 1","Tabs 2", "Tabs 3")
+        return listOf("Tab 1","Tab 2", "Tab 3")
     }
 }
 class TabSampleScrollableData() {
     fun getSampleItems(): List<String> {
-        return listOf("Tabs 1","Tabs 2", "Tabs 3","Tabs 1","Tabs 2", "Tabs 3")
+        return listOf(" Tab First ","Tab Second ", " Tab Third "," Tab Fourth "," Tab Fifth ", " Tab Sixth ")
     }
 }

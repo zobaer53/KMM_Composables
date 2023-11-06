@@ -6,8 +6,10 @@ import androidx.compose.ui.unit.sp
 val sz_spacing_zero = 0.dp
 val sz_spacing_deepFreeze = 2.dp
 val sz_spacing_quickFreeze = 4.dp
+val sz_spacing_quickFreeze_1 = 6.dp
 val sz_spacing_glacial = 8.dp
-val sz_spacing_frostbite = 12.dp
+val sz_spacing_frostbite = 10.dp
+val sz_spacing_frostbite1 = 14.dp
 val sz_spacing_bitterCold = 16.dp
 val sz_spacing_cool = 20.dp
 val sz_spacing_mild = 24.dp
