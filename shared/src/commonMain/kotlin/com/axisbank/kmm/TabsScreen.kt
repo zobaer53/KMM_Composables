@@ -116,12 +116,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexEnabled,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
-                        contentColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.primary
-                        } else LightColors.primary // Set the content color for selected tab
+                        backgroundColor =  LightColors.background,
+                        contentColor = LightColors.primary // Set the content color for selected tab
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
@@ -163,9 +159,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
+                        backgroundColor = LightColors.background,
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -202,9 +196,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = containerTabIndexEnabled,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
+                        backgroundColor = LightColors.background,
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -219,14 +211,12 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         Modifier.border(
                                             width = 1.dp,
                                             color = if(containerTabIndexEnabled == index){
-                                                    sz_color_typo_action_tertiary
+                                                sz_color_typo_action_tertiary
                                             }else Color.Gray,
                                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
                                         ).background(
                                             if (containerTabIndexEnabled == index) {
-                                                if (themeViewModel.isDarkMode) {
-                                                    sz_color_typo_action_tertiary
-                                                } else  sz_color_typo_on_surface
+                                                sz_color_stroke_secondary_selected
                                             }else Color.Transparent)
                             ) {
                                 Text(tabTitle, Modifier
@@ -234,9 +224,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         top =sz_spacing_frostbite,
                                         bottom = sz_spacing_frostbite),
                                     color = if (containerTabIndexEnabled == index) {
-                                    if (themeViewModel.isDarkMode) {
-                                        Color.White
-                                    } else sz_color_typo_action_tertiary
+                                        sz_color_typo_action_tertiary
                                 } else Color.Gray,
                                     fontSize = sz_typo_font_size_frigid)
                             }
@@ -259,9 +247,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
+                        backgroundColor =LightColors.background,
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -303,12 +289,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexEnabledWithAssets,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
-                        contentColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.primary
-                        } else LightColors.primary // Set the content color for selected tab
+                        backgroundColor = LightColors.background,
+                        contentColor =  LightColors.primary
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
@@ -367,9 +349,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = containerTabIndexEnabledWithAssets,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
+                        backgroundColor = LightColors.background,
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -390,9 +370,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         ).background(
 
                                             if(containerTabIndexEnabledWithAssets == index){
-                                                if (themeViewModel.isDarkMode) {
-                                                    sz_color_typo_action_tertiary
-                                                } else  sz_color_typo_on_surface
+                                                  sz_color_stroke_secondary_selected
                                             }else Color.Transparent)
                             ) {
                                 Row {
@@ -438,9 +416,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = if (themeViewModel.isDarkMode) {
-                            DarkColors.background
-                        } else LightColors.background,
+                        backgroundColor = LightColors.background,
                         contentColor = Color.Transparent,
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -603,9 +579,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                     shape =  RoundedCornerShape(sz_spacing_quickFreeze)
                                                 ).background(
                                                     if (defaultScrolledTabIndexEnabledWithAssets == index) {
-                                                        if (themeViewModel.isDarkMode) {
-                                                            sz_color_typo_action_tertiary
-                                                        } else sz_color_typo_on_surface
+                                                   sz_color_typo_on_surface
                                                     } else Color.Transparent
                                                 )
 
@@ -676,9 +650,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                 shape = RoundedCornerShape(sz_spacing_quickFreeze)
                                             ).background(
                                                 if(scrolledContainerTabIndexEnabledWithAssets == index){
-                                                    if (themeViewModel.isDarkMode) {
-                                                        sz_color_typo_action_tertiary
-                                                    } else  sz_color_typo_on_surface
+                                                    sz_color_stroke_secondary_selected
                                                 }else Color.Transparent)
                                 ) {
                                     Row  {
