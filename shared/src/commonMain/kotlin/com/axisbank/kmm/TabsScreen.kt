@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.axisbank.dbat.arctic.ui.components.appBar.AppBar
 import com.axisbank.dbat.arctic.ui.components.appBar.AppbarTheme
@@ -54,6 +55,16 @@ import com.axisbank.kmm.TabSampleScrollableData
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
+
+    // Example of how to get FontFamily from Typography
+    val typography = getTypography()
+
+    val latoRegular: FontFamily? = typography.body1.fontFamily
+    val latoBold: FontFamily? = typography.h1.fontFamily
+    val latoSemiBold: FontFamily? = typography.subtitle1.fontFamily
+
+// You can access other text styles in a similar way
+
     val tabSampleData = TabSampleData()
     val tabScrollableSampleData = TabSampleScrollableData()
     val tabItems = tabSampleData.getSampleItems()
@@ -94,7 +105,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -117,10 +129,13 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial),
                                 selectedContentColor = LightColors.primary
                             ) {
-                                Text(tabTitle,
-                                    color = if(selectedTabIndexEnabled == index){
+                                Text(
+                                    tabTitle,
+                                    color = if (selectedTabIndexEnabled == index) {
                                         LightColors.primary
-                                    }else Color.Gray)
+                                    } else Color.Gray,
+                                    fontFamily = latoRegular
+                                )
                             }
                         }
                     }
@@ -135,7 +150,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
                     TabRow(
@@ -148,15 +164,18 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
                                 enabled = false,
-                                selected =  false,
+                                selected = false,
                                 onClick = {},
                                 selectedContentColor = Color.Transparent,
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial)
                             ) {
-                                Text(tabTitle,
-                                    color = if(selectedTabIndexDisabled == index){
+                                Text(
+                                    tabTitle,
+                                    color = if (selectedTabIndexDisabled == index) {
                                         LightColors.primary
-                                    }else Color.Gray)
+                                    } else Color.Gray,
+                                    fontFamily = latoRegular
+                                )
                             }
                         }
                     }
@@ -169,7 +188,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -182,10 +202,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
-                                selected =  containerTabIndexEnabled == index,
+                                selected = containerTabIndexEnabled == index,
                                 onClick = {
                                     containerTabIndexEnabled = index
-                                          containerClicked != containerClicked
+                                    containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial) then
@@ -194,17 +214,23 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             color = Color.Gray,
                                             shape = RectangleShape
                                         ).background(
-                                            if(containerTabIndexEnabled == index){
+                                            if (containerTabIndexEnabled == index) {
                                                 if (themeViewModel.isDarkMode) {
                                                     sz_color_typo_action_tertiary
-                                                } else  sz_color_stroke_secondary_selected
-                                            }else Color.Transparent)
+                                                } else sz_color_stroke_secondary_selected
+                                            } else Color.Transparent
+                                        )
                             ) {
-                                Text(tabTitle, color = if (containerTabIndexEnabled == index) {
-                                    if (themeViewModel.isDarkMode) {
-                                        Color.White
-                                    } else sz_color_typo_action_tertiary
-                                } else Color.Gray, modifier = Modifier.padding(sz_spacing_quickFreeze))
+                                Text(
+                                    tabTitle,
+                                    color = if (containerTabIndexEnabled == index) {
+                                        if (themeViewModel.isDarkMode) {
+                                            Color.White
+                                        } else sz_color_typo_action_tertiary
+                                    } else Color.Gray,
+                                    modifier = Modifier.padding(sz_spacing_quickFreeze),
+                                    fontFamily = latoRegular
+                                )
                             }
                         }
                     }
@@ -218,7 +244,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -232,15 +259,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
                                 enabled = false,
-                                selected =  false,
+                                selected = false,
                                 onClick = {
-                                  /*  containerTabIndexEnabled = index
-                                    containerClicked != containerClicked*/
+                                    /*  containerTabIndexEnabled = index
+                                      containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial)
                             ) {
-                                Text(tabTitle, modifier = Modifier.padding(sz_spacing_quickFreeze), color = Color.Gray)
+                                Text(
+                                    tabTitle,
+                                    modifier = Modifier.padding(sz_spacing_quickFreeze),
+                                    color = Color.Gray,
+                                    fontFamily = latoRegular
+                                )
                             }
                         }
                     }
@@ -255,7 +287,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -279,10 +312,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 selectedContentColor = LightColors.primary
                             ) {
                                 Row {
-                                    Text(tabTitle,modifier = Modifier.padding(sz_spacing_quickFreeze),
-                                        color = if(selectedTabIndexEnabledWithAssets == index){
+                                    Text(
+                                        tabTitle,
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze),
+                                        color = if (selectedTabIndexEnabledWithAssets == index) {
                                             LightColors.primary
-                                        }else Color.Gray)
+                                        } else Color.Gray,
+                                        fontFamily = latoRegular
+                                    )
                                     Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
                                         imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
@@ -305,7 +342,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -318,29 +356,33 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
-                                selected =  containerTabIndexEnabledWithAssets == index,
+                                selected = containerTabIndexEnabledWithAssets == index,
                                 onClick = {
                                     containerTabIndexEnabledWithAssets = index
                                     containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal =sz_spacing_glacial) then
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial) then
                                         Modifier.border(
                                             width = 1.dp,
                                             color = Color.Gray,
                                             shape = RectangleShape
                                         ).background(
-                                            if(containerTabIndexEnabledWithAssets == index){
+                                            if (containerTabIndexEnabledWithAssets == index) {
                                                 sz_color_stroke_secondary_selected
-                                            }else Color.Transparent)
+                                            } else Color.Transparent
+                                        )
                             ) {
                                 Row {
                                     Text(
-                                        tabTitle, color = if (containerTabIndexEnabledWithAssets == index) {
+                                        tabTitle,
+                                        color = if (containerTabIndexEnabledWithAssets == index) {
                                             if (themeViewModel.isDarkMode) {
                                                 sz_color_typo_action_tertiary
-                                            } else  Color.White
-                                        } else Color.Gray, modifier = Modifier.padding(sz_spacing_quickFreeze)
+                                            } else Color.White
+                                        } else Color.Gray,
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze),
+                                        fontFamily = latoRegular
                                     )
                                     Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
@@ -357,14 +399,15 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
                     Text(
-                        text = "Container Tabs Disabled With Assets" ,
+                        text = "Container Tabs Disabled With Assets",
                         fontSize = sz_typo_font_size_cold,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -378,17 +421,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
                                 enabled = false,
-                                selected =  false,
+                                selected = false,
                                 onClick = {
                                     /*  containerTabIndexEnabled = index
                                       containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.padding(horizontal =sz_spacing_glacial)
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial)
                             ) {
                                 Row {
                                     Text(
-                                        tabTitle, modifier = Modifier.padding(sz_spacing_quickFreeze),color = Color.Gray
+                                        tabTitle,
+                                        modifier = Modifier.padding(sz_spacing_quickFreeze),
+                                        color = Color.Gray,
+                                        fontFamily = latoRegular
                                     )
                                     Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                     Image(
@@ -410,7 +456,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -424,17 +471,26 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         selectedScrollableTabIndexEnabled = index
                                     },
                                     enabled = true,
-                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
-                                        brush = if (selectedScrollableTabIndexEnabled == index) SolidColor(LightColors.primary) else SolidColor(Color.Transparent) // Brush parameter
+                                        brush = if (selectedScrollableTabIndexEnabled == index) SolidColor(
+                                            LightColors.primary
+                                        ) else SolidColor(Color.Transparent) // Brush parameter
                                     ),
-                                    selectedContentColor = if (selectedScrollableTabIndexEnabled == index)LightColors.primary else Color.Transparent
+                                    selectedContentColor = if (selectedScrollableTabIndexEnabled == index) LightColors.primary else Color.Transparent
                                 ) {
-                                    Text(tabTitle, Modifier
-                                        .padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_cool, bottom = sz_spacing_quickFreeze),
-                                        color= Color.Gray
-                                        )
+                                    Text(
+                                        tabTitle, Modifier
+                                            .padding(
+                                                start = sz_spacing_cool,
+                                                top = sz_spacing_quickFreeze,
+                                                end = sz_spacing_cool,
+                                                bottom = sz_spacing_quickFreeze
+                                            ),
+                                        color = Color.Gray,
+                                        fontFamily = latoRegular
+                                    )
                                 }
                             }
                         }
@@ -449,7 +505,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoRegular
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -463,14 +520,24 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         //selectedScrollableTabIndexEnabled = index
                                     },
                                     enabled = false,
-                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
-                                        brush =SolidColor(Color.Transparent) // Brush parameter
+                                        brush = SolidColor(Color.Transparent) // Brush parameter
                                     ),
-                                    selectedContentColor =Color.Gray
+                                    selectedContentColor = Color.Gray
                                 ) {
-                                    Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_cool, bottom = sz_spacing_quickFreeze),color = Color.Gray)
+                                    Text(
+                                        tabTitle,
+                                        Modifier.padding(
+                                            start = sz_spacing_cool,
+                                            top = sz_spacing_quickFreeze,
+                                            end = sz_spacing_cool,
+                                            bottom = sz_spacing_quickFreeze
+                                        ),
+                                        color = Color.Gray,
+                                        fontFamily = latoRegular
+                                    )
                                 }
                             }
                         }
@@ -485,7 +552,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -499,22 +567,33 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         scrolledContainerTabIndexEnabledWithAssets = index
                                     },
                                     enabled = true,
-                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
-                                        brush = if (scrolledContainerTabIndexEnabledWithAssets == index) SolidColor(LightColors.primary) else SolidColor(Color.Transparent) // Brush parameter
+                                        brush = if (scrolledContainerTabIndexEnabledWithAssets == index) SolidColor(
+                                            LightColors.primary
+                                        ) else SolidColor(Color.Transparent) // Brush parameter
                                     ).background(
-                                                if(scrolledContainerTabIndexEnabledWithAssets == index){
-                                                    sz_color_stroke_secondary_selected
-                                                }else Color.Transparent)
-                                    ,
-                                    selectedContentColor = if (selectedScrollableTabIndexEnabled == index)LightColors.primary else Color.Transparent
+                                        if (scrolledContainerTabIndexEnabledWithAssets == index) {
+                                            sz_color_stroke_secondary_selected
+                                        } else Color.Transparent
+                                    ),
+                                    selectedContentColor = if (selectedScrollableTabIndexEnabled == index) LightColors.primary else Color.Transparent
                                 ) {
-                                    Row{
-                                        Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_quickFreeze, bottom = sz_spacing_quickFreeze),
+                                    Row {
+                                        Text(
+                                            tabTitle,
+                                            Modifier.padding(
+                                                start = sz_spacing_cool,
+                                                top = sz_spacing_quickFreeze,
+                                                end = sz_spacing_quickFreeze,
+                                                bottom = sz_spacing_quickFreeze
+                                            ),
                                             color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
                                                 sz_color_typo_action_tertiary
-                                            } else Color.Gray)
+                                            } else Color.Gray,
+                                            fontFamily = latoRegular
+                                        )
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content description
@@ -535,7 +614,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        )
+                        ),
+                        fontFamily = latoBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_glacial))
 
@@ -549,16 +629,25 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         //scrolledContainerTabIndexEnabledWithAssets = index
                                     },
                                     enabled = false,
-                                    modifier = Modifier.padding(horizontal =sz_spacing_glacial) then Modifier.border(
+                                    modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
                                         shape = RectangleShape, // Shape parameter
-                                        brush =SolidColor(Color.Transparent) // Brush parameter
-                                    ).background(Color.Transparent)
-                                    ,
-                                    selectedContentColor =Color.Transparent
+                                        brush = SolidColor(Color.Transparent) // Brush parameter
+                                    ).background(Color.Transparent),
+                                    selectedContentColor = Color.Transparent
                                 ) {
-                                    Row{
-                                        Text(tabTitle, Modifier.padding(start = sz_spacing_cool, top =sz_spacing_quickFreeze, end = sz_spacing_quickFreeze, bottom =sz_spacing_quickFreeze),color = Color.Gray)
+                                    Row {
+                                        Text(
+                                            tabTitle,
+                                            Modifier.padding(
+                                                start = sz_spacing_cool,
+                                                top = sz_spacing_quickFreeze,
+                                                end = sz_spacing_quickFreeze,
+                                                bottom = sz_spacing_quickFreeze
+                                            ),
+                                            color = Color.Gray,
+                                            fontFamily = latoRegular
+                                        )
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content description
