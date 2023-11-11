@@ -130,7 +130,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
 
                     // Without Placeholder dropdown section
                     DropdownSection(
-                        title = "Without Placeholder",
+                        title = "Without Helper",
                         selectedValue = selectedValueWithoutPlaceholder,
                         onSelectedValueChange = { selectedValueWithoutPlaceholder = it },
                         isMenuExpanded = isMenuExpandedWithoutPlaceholder,
