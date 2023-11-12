@@ -67,7 +67,6 @@ import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_iceAge
 import getTypography
 
-
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DropdownSection(
@@ -96,7 +95,6 @@ fun DropdownSection(
 
     var imeAction by remember { mutableStateOf(ImeAction.Done) }
     var keyboardController by remember { mutableStateOf<SoftwareKeyboardController?>(null) }
-
 
     Column(Modifier.padding(end = sz_spacing_cool)) {
         Text(
@@ -135,16 +133,22 @@ fun DropdownSection(
                             onMenuExpandedChange(!isMenuExpanded)
                             Log.i("dropdown", "text field clicked, isMenuExpanded $isMenuExpanded")
                         }
-                    .onFocusChanged {
-                        if (it.isFocused) {
-                            // TextField gained focus, expand the menu
-                            onMenuExpandedChange(true)
-                            Log.i("dropdown","text field clicked has focus isMenuExpanded $isMenuExpanded")
-                        }else{
-                            Log.i("dropdown","text field lost focus isMenuExpanded $isMenuExpanded")
-                            //onMenuExpandedChange(false)
-                        }
-                    },
+                        .onFocusChanged {
+                            if (it.isFocused) {
+                                // TextField gained focus, expand the menu
+                                onMenuExpandedChange(true)
+                                Log.i(
+                                    "dropdown",
+                                    "text field clicked has focus isMenuExpanded $isMenuExpanded"
+                                )
+                            } else {
+                                Log.i(
+                                    "dropdown",
+                                    "text field lost focus isMenuExpanded $isMenuExpanded"
+                                )
+                                //onMenuExpandedChange(false)
+                            }
+                        },
                     label = {
                         Text(
                             text = "Label",
@@ -187,10 +191,8 @@ fun DropdownSection(
                         unfocusedIndicatorColor = if (isError) Color.Red else Color.Gray
                     )
                 )
-
             }
-
-            if(noPlaceHolder == false){
+            if (noPlaceHolder == false) {
                 IconText(
                     isError = isError, // Set to true to show the error icon and text in red
                     isSuccess = isSuccess,
@@ -198,9 +200,7 @@ fun DropdownSection(
                     latoRegular = latoRegular
                 )
             }
-
         }
-
         // Dropdown menu positioned below the selected item box
         if (isMenuExpanded && !isDisabled) {
             Box(
@@ -210,7 +210,11 @@ fun DropdownSection(
                 DropdownMenu(
                     expanded = isMenuExpanded,
                     onDismissRequest = { onMenuExpandedChange(false) },
-                    properties = PopupProperties(focusable = true,dismissOnBackPress = true,dismissOnClickOutside = true)
+                    properties = PopupProperties(
+                        focusable = true,
+                        dismissOnBackPress = true,
+                        dismissOnClickOutside = true
+                    )
                 ) {
 
                     items.subList(1, items.size).forEach { item ->
@@ -218,9 +222,12 @@ fun DropdownSection(
                             onSelectedValueChange(item)
                             selectedValueRemembered = item
                             onMenuExpandedChange(false)
-                            Log.i("dropdown","drop down menu clicked and isMenuExpanded $isMenuExpanded")
+                            Log.i(
+                                "dropdown",
+                                "drop down menu clicked and isMenuExpanded $isMenuExpanded"
+                            )
 
-                            Toast.makeText(context,"Selected $item",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
                         }) {
                             Text(
                                 text = item,
@@ -229,15 +236,15 @@ fun DropdownSection(
                             )
                         }
                     }
-
-                    Log.i("dropdown","drop down menu not clicked and isMenuExpanded $isMenuExpanded")
+                    Log.i(
+                        "dropdown",
+                        "drop down menu not clicked and isMenuExpanded $isMenuExpanded"
+                    )
                 }
             }
         }
     }
-
     Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
-
 }
 
 
