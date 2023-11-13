@@ -14,6 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
@@ -492,35 +493,41 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
-                    LazyRow(
-                        content = {
-                            items(tabItemsScrolable.size) { index ->
-                                val tabTitle = tabItemsScrolable[index]
-                                Tab(
-                                    selected = selectedScrollableTabIndexEnabled == index,
-                                    onClick = {
-                                        selectedScrollableTabIndexEnabled = index
-                                    },
-                                    enabled = true,
-                                    modifier = Modifier.padding(horizontal = sz_spacing_glacial),
-                                    selectedContentColor = if (selectedScrollableTabIndexEnabled == index) LightColors.primary else Color.Transparent
-                                ) {
-                                    Text(
-                                        tabTitle, Modifier
-                                            .padding(
-                                                start = sz_spacing_cool,
-                                                top = sz_spacing_quickFreeze,
-                                                end = sz_spacing_cool,
-                                                bottom = sz_spacing_quickFreeze
-                                            ),
-                                        color = if (selectedScrollableTabIndexEnabled == index) LightColors.primary else Color.Gray,
-                                        fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = latoRegular
-                                    )
-                                }
+                    ScrollableTabRow(
+                        selectedTabIndex = selectedScrollableTabIndexEnabled,
+                        backgroundColor = LightColors.background,
+                        contentColor = LightColors.primary,
+                        edgePadding = 0.dp// Set the content color for selected tab
+                    ) {
+                        tabItemsScrolable.forEachIndexed { index, tabTitle ->
+                            Tab(
+                                selected = selectedScrollableTabIndexEnabled == index,
+                                onClick = {
+                                    selectedScrollableTabIndexEnabled = index
+                                },
+                                enabled = true,
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial),
+                                selectedContentColor = LightColors.primary
+                            ) {
+
+                                Text(
+                                    tabTitle, Modifier
+                                        .padding(
+                                            start = sz_spacing_cool,
+                                            top = sz_spacing_frostbite,
+                                            end = sz_spacing_cool,
+                                            bottom = sz_spacing_frostbite
+                                        ),
+                                    color = if (selectedScrollableTabIndexEnabled == index) {
+                                        LightColors.primary
+                                    } else Color.Gray,
+                                    fontSize = sz_typo_font_size_frigid,
+                                    fontFamily = latoRegular
+                                )
                             }
                         }
-                    )
+                    }
+
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
                         text = "Default Scrollable Tabs Disabled",
@@ -696,11 +703,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         fontFamily = latoSemiBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
-                    LazyRow(
-                        content = {
-                            items(tabItemsScrolable.size) { index ->
-                                val tabTitle = tabItemsScrolable[index]
-                                Tab(
+                    ScrollableTabRow(
+                        selectedTabIndex = defaultScrolledTabIndexEnabledWithAssets,
+                        backgroundColor = LightColors.background,
+                        contentColor = LightColors.primary,
+                        edgePadding = 0.dp// Set the content color for selected tab
+                    ) {
+                        tabItemsScrolable.forEachIndexed { index, tabTitle ->
+                            Tab(
                                     enabled = true,
                                     selected = defaultScrolledTabIndexEnabledWithAssets == index,
                                     onClick = {
@@ -757,7 +767,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 }
                             }
                         }
-                    )
+
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
                         text = "Scrollable Container Tabs With Assets",
