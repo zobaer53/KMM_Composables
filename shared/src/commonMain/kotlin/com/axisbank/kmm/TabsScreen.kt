@@ -2,12 +2,14 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
@@ -330,34 +332,27 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         ),
                                 selectedContentColor = LightColors.primary
                             ) {
-                                Row {
+                                Row(Modifier.padding(
+                                    start = sz_spacing_cool,
+                                    top = sz_spacing_frostbite,
+                                    bottom = sz_spacing_frostbite,
+                                    end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
-                                        modifier = Modifier
-                                            .padding(
-                                                start = sz_spacing_cool,
-                                                end = sz_spacing_quickFreeze,
-                                                top = sz_spacing_frostbite,
-                                                bottom = sz_spacing_frostbite
-                                            ),
                                         color = if (selectedTabIndexEnabledWithAssets == index) {
                                             LightColors.primary
                                         } else Color.Gray,
                                         fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = latoRegular
-                                    )
-                                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
-                                    Image(
-                                        imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
-                                        contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier
-                                            .padding(
-                                                top = sz_spacing_frostbite,
-                                                bottom = sz_spacing_frostbite, end = sz_spacing_cool
-                                            ) // Adjust size as needed
-                                    )
+                                        fontFamily = latoRegular)
+                                    Spacer(modifier = Modifier.width(sz_spacing_frostbite))
+                                    Box(Modifier.size(18.dp)) {
+                                        Image(
+                                            imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
+                                            contentDescription = null, // Set to null if you don't need a content descriptio
+                                               // Adjust size as needed
+                                        )
+                                    }
                                 }
-
                             }
                         }
                     }
@@ -405,32 +400,27 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             } else Color.Transparent
                                         )
                             ) {
-                                Row {
+                                Row(Modifier.padding(
+                                    start = sz_spacing_cool,
+                                    top = sz_spacing_frostbite,
+                                    bottom = sz_spacing_frostbite,
+                                    end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
                                         color = if (containerTabIndexEnabledWithAssets == index) {
                                             sz_color_typo_action_tertiary
                                         } else Color.Gray,
                                         fontSize = sz_typo_font_size_frostbite,
-                                        modifier = Modifier
-                                            .padding(
-                                                start = sz_spacing_cool,
-                                                top = sz_spacing_frostbite,
-                                                end = sz_spacing_quickFreeze,
-                                                bottom = sz_spacing_frostbite
-                                            ),
                                         fontFamily = latoRegular
                                     )
-                                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
-                                    Image(
-                                        imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
-                                        contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier
-                                            .padding(start = 4.dp,
-                                                top = sz_spacing_frostbite,
-                                                bottom = sz_spacing_frostbite, end = sz_spacing_cool
-                                            )
-                                    )
+                                    Spacer(modifier = Modifier.width(sz_spacing_frostbite))
+
+                                    Box(Modifier.size(18.dp)) {
+                                        Image(
+                                            imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
+                                            contentDescription = null, // Set to null if you don't need a content description
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -447,7 +437,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         ),
                         fontFamily = latoSemiBold
                     )
-                    Spacer(modifier = Modifier.height(sz_spacing_glacial))
+                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
@@ -473,30 +463,24 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
                                         )
                             ) {
-                                Row {
+                                Row(Modifier.padding(
+                                    start = sz_spacing_cool,
+                                    top = sz_spacing_frostbite,
+                                    bottom = sz_spacing_frostbite,
+                                    end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
                                         color = Color.Gray,
                                         fontSize = sz_typo_font_size_frostbite,
-                                        modifier = Modifier
-                                            .padding(
-                                                start = sz_spacing_cool,
-                                                top = sz_spacing_frostbite,
-                                                end = sz_spacing_quickFreeze,
-                                                bottom = sz_spacing_frostbite
-                                            ),
                                         fontFamily = latoRegular
                                     )
-                                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
-                                    Image(
-                                        imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
-                                        contentDescription = null, // Set to null if you don't need a content description
-                                        modifier = Modifier
-                                            .padding(start = sz_spacing_quickFreeze,
-                                                top = sz_spacing_frostbite,
-                                                bottom = sz_spacing_frostbite, end = sz_spacing_cool
-                                            ) // Adjust size as needed
-                                    )
+                                    Spacer(modifier = Modifier.width(sz_spacing_frostbite))
+                                    Box(Modifier.size(18.dp)) {
+                                        Image(
+                                            imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
+                                            contentDescription = null // Set to null if you don't need a content description
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -660,7 +644,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.height(sz_spacing_glacial))
+                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
                         text = "Disabled Scrollable Container",
                         fontSize = sz_typo_font_size_frigid,
@@ -672,7 +656,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         ),
                         fontFamily = latoSemiBold
                     )
-                    Spacer(modifier = Modifier.height(sz_spacing_glacial))
+                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
                     LazyRow(
                         content = {
@@ -712,10 +696,6 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         }
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
-
-
-
-                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
                         text = "Default Scrollable Tabs With Assets",
                         fontSize = sz_typo_font_size_frigid,
@@ -728,9 +708,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         fontFamily = latoSemiBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+
                     ScrollableTabRow(
                         selectedTabIndex = defaultScrolledTabIndexEnabledWithAssets,
-                        backgroundColor =sz_color_surface_background,
+                        backgroundColor = sz_color_surface_background,
                         divider = {
                             Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                         },
@@ -739,62 +720,43 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     ) {
                         tabItemsScrolable.forEachIndexed { index, tabTitle ->
                             Tab(
-                                    enabled = true,
-                                    selected = defaultScrolledTabIndexEnabledWithAssets == index,
-                                    onClick = {
-                                        defaultScrolledTabIndexEnabledWithAssets = index
-                                        containerClicked != containerClicked
-                                    },
-                                    selectedContentColor = Color.Transparent,
-                                    modifier = Modifier.padding(end = sz_spacing_glacial)
+                                selected = defaultScrolledTabIndexEnabledWithAssets == index,
+                                onClick = {
+                                    defaultScrolledTabIndexEnabledWithAssets = index
+                                },
+                                enabled = true,
+                                modifier = Modifier.padding(horizontal = sz_spacing_glacial),
+                                selectedContentColor = LightColors.primary
+                            ) {
+                                Row(
+                                    Modifier.padding(
+                                        start = sz_spacing_cool,
+                                        top = sz_spacing_frostbite,
+                                        bottom = sz_spacing_frostbite,
+                                        end = sz_spacing_cool
+                                    )
                                 ) {
-                                    Column {
-                                        Row(
-                                            verticalAlignment = Alignment.CenterVertically,
-                                            modifier = Modifier.padding( sz_spacing_frostbite) then
-                                                    Modifier.border(
-                                                        width = 1.dp,
-                                                        color = Color.Transparent,
-                                                        shape = RoundedCornerShape(
-                                                            sz_spacing_quickFreeze
-                                                        )
-                                                    ).background(
-                                                        if (defaultScrolledTabIndexEnabledWithAssets == index) {
-                                                            sz_color_typo_on_surface
-                                                        } else Color.Transparent
-                                                    )
 
-                                        ) {
-                                            Text(
-                                                tabTitle,
-                                                color = if (defaultScrolledTabIndexEnabledWithAssets == index) {
-                                                    LightColors.primary
-                                                } else Color.Gray,
-                                                fontSize = sz_typo_font_size_frigid,
-                                                modifier = Modifier
-                                                    .padding(
-                                                        start = sz_spacing_frostbite,
-                                                        top = sz_spacing_frostbite,
-                                                        bottom = sz_spacing_frostbite
-                                                    ),
-                                                fontFamily = latoRegular
-                                            )
-                                            Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
-                                            Image(
-                                                imageVector = Icons.Default.AccountBox,
-                                                contentDescription = null,
-                                                modifier = Modifier
-                                                    .padding(start = sz_spacing_quickFreeze,
-                                                        top = sz_spacing_frostbite,
-                                                        bottom = sz_spacing_frostbite,
-                                                        end = sz_spacing_frostbite
-                                                    )
-                                            )
-                                        }
+                                    Text(
+                                        tabTitle,
+                                        color = if (defaultScrolledTabIndexEnabledWithAssets == index) {
+                                            LightColors.primary
+                                        } else Color.Gray,
+                                        fontSize = sz_typo_font_size_frigid,
+                                        fontFamily = latoRegular
+                                    )
+                                    Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
+                                    Box(Modifier.size(18.dp)) {
+                                        Image(
+                                            imageVector = Icons.Default.AccountBox,
+                                            contentDescription = null
+                                        )
                                     }
                                 }
                             }
                         }
+                    }
+
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
@@ -835,32 +797,26 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                 } else Color.Transparent
                                             )
                                 ) {
-                                    Row {
+                                    Row(Modifier.padding(
+                                        start = sz_spacing_cool,
+                                        top = sz_spacing_frostbite,
+                                        bottom = sz_spacing_frostbite,
+                                        end = sz_spacing_cool)) {
                                         Text(
                                             tabTitle,
                                             color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
                                                 sz_color_typo_action_tertiary
                                             } else Color.Gray,
                                             fontSize = sz_typo_font_size_frigid,
-                                            modifier = Modifier
-                                                .padding(
-                                                    start = sz_spacing_cool,
-                                                    top = sz_spacing_frostbite,
-                                                    bottom = sz_spacing_frostbite
-                                                ),
                                             fontFamily = latoRegular
                                         )
                                         Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
-                                        Image(
-                                            imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
-                                            contentDescription = null, // Set to null if you don't need a content description
-                                            modifier = Modifier
-                                                .padding(
-                                                    top = sz_spacing_frostbite,
-                                                    bottom = sz_spacing_frostbite,
-                                                    end = sz_spacing_cool
-                                                )
-                                        )
+                                        Box(Modifier.size(18.dp)) {
+                                            Image(
+                                                imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
+                                                contentDescription = null, // Set to null if you don't need a content description
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -869,7 +825,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
 
 
-                    Spacer(modifier = Modifier.height(sz_spacing_glacial))
+                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
                         text = "Disabled Scrollable Container Tabs With Assets",
                         fontSize = sz_typo_font_size_frigid,
@@ -881,7 +837,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                         ),
                         fontFamily = latoSemiBold
                     )
-                    Spacer(modifier = Modifier.height(sz_spacing_glacial))
+                    Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
                     LazyRow(
                         content = {
@@ -900,30 +856,25 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     ).background(Color.Transparent),
                                     selectedContentColor = Color.Transparent
                                 ) {
-                                    Row {
+                                    Row(Modifier.padding(
+                                        start = sz_spacing_cool,
+                                        top = sz_spacing_frostbite,
+                                        bottom = sz_spacing_frostbite,
+                                        end = sz_spacing_cool)) {
                                         Text(
                                             tabTitle,
                                             color = Color.Gray,
-
                                             fontSize = sz_typo_font_size_frigid,
-                                            modifier = Modifier
-                                                .padding(
-                                                    start = sz_spacing_cool,
-                                                    top = sz_spacing_frostbite,
-                                                    bottom = sz_spacing_frostbite
-                                                ),
                                             fontFamily = latoRegular
                                         )
-                                        Image(
-                                            imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
-                                            contentDescription = null, // Set to null if you don't need a content description
-                                            modifier = Modifier
-                                                .padding(
-                                                    top = sz_spacing_frostbite,
-                                                    bottom = sz_spacing_frostbite,
-                                                    end = sz_spacing_cool
-                                                ) // Adjust size as needed
-                                        )
+                                        Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
+                                        Box(Modifier.size(18.dp)) {
+                                            Image(
+                                                imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
+                                                contentDescription = null // Set to null if you don't need a content description
+                                                // Adjust size as needed
+                                            )
+                                        }
                                     }
                                 }
                             }
