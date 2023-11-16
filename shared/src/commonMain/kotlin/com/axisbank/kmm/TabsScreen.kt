@@ -42,6 +42,7 @@ import com.axisbank.dbat.arctic.ui.theme.LightColors
 import com.axisbank.dbat.arctic.ui.theme.ThemeViewModel
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_color_stroke_secondary_selected
+import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_background
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_on_surface
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
@@ -70,6 +71,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
     val tabItems = tabSampleData.getSampleItems()
     val tabItemsScrolable = tabScrollableSampleData.getSampleItems()
     var selectedTabIndexEnabled by remember { mutableIntStateOf(0) }
+    var selectedTabIndexEnabledClicked by remember { mutableStateOf(false) }
     var selectedTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
     var selectedScrollableTabIndexEnabled by remember { mutableIntStateOf(0) }
     var containerTabIndexEnabled by remember { mutableIntStateOf(0) }
@@ -87,7 +89,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     "Tabs",
                     pressOnBack = { tabsClick.invoke() },
                     Icons.Filled.ArrowBack,
-                    AppbarTheme.BURGUNDY, themeViewModel) }
+                    AppbarTheme.BURGUNDY, themeViewModel) },
+            backgroundColor = sz_color_surface_background,
         ) {
             Column(
                 modifier = Modifier
@@ -107,14 +110,18 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     TabRow(
                         selectedTabIndex = selectedTabIndexEnabled,
-                        backgroundColor = LightColors.background,
-                        contentColor = LightColors.primary // Set the content color for selected tab
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
+                        contentColor = LightColors.primary,
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
                                 selected = selectedTabIndexEnabled == index,
                                 onClick = {
                                     selectedTabIndexEnabled = index
+                                    selectedTabIndexEnabledClicked != selectedTabIndexEnabledClicked
                                 },
                                 enabled = true,
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial),
@@ -154,8 +161,8 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = LightColors.background,
-                        contentColor = Color.Transparent
+                        backgroundColor = sz_color_surface_background,
+                        contentColor = sz_color_surface_background
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
                             Tab(
@@ -196,7 +203,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = containerTabIndexEnabled,
-                        backgroundColor = LightColors.background,
+                        backgroundColor =sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -251,7 +261,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = LightColors.background,
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -296,7 +309,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexEnabledWithAssets,
-                        backgroundColor = LightColors.background,
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = LightColors.primary
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -361,7 +377,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = containerTabIndexEnabledWithAssets,
-                        backgroundColor = LightColors.background,
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = Color.Transparent
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -432,7 +451,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     TabRow(
                         selectedTabIndex = selectedTabIndexDisabled,
-                        backgroundColor = LightColors.background,
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = Color.Transparent,
                     ) {
                         tabItems.forEachIndexed { index, tabTitle ->
@@ -495,7 +517,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     ScrollableTabRow(
                         selectedTabIndex = selectedScrollableTabIndexEnabled,
-                        backgroundColor = LightColors.background,
+                        backgroundColor = sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = LightColors.primary,
                         edgePadding = 0.dp// Set the content color for selected tab
                     ) {
@@ -705,7 +730,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     ScrollableTabRow(
                         selectedTabIndex = defaultScrolledTabIndexEnabledWithAssets,
-                        backgroundColor = LightColors.background,
+                        backgroundColor =sz_color_surface_background,
+                        divider = {
+                            Spacer(modifier = Modifier.height(sz_spacing_frostbite))
+                        },
                         contentColor = LightColors.primary,
                         edgePadding = 0.dp// Set the content color for selected tab
                     ) {
