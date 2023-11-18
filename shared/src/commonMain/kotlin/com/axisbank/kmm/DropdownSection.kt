@@ -1,11 +1,7 @@
 package com.axisbank.kmm
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,17 +10,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -36,36 +28,31 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.SoftwareKeyboardController
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
-import com.axisbank.dbat.arctic.ui.theme.sz_spacing_deepFreeze
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
-import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_cold
+import com.axisbank.dbat.arctic.ui.theme.sz_typo_character_spacing_arctic
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frigid
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frostbite
-import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_iceAge
-import getTypography
+import com.axisbank.dbat.arctic.ui.theme.sz_typo_line_height_iceAge
+import com.axisbank.kmm.resources.Resources
+import getStyle
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -82,12 +69,6 @@ fun DropdownSection(
     items: List<String>
 ) {
     val context = LocalContext.current
-    // Example of how to get FontFamily from Typography
-    val typography = getTypography()
-
-    val latoRegular: FontFamily? = typography.body1.fontFamily
-    val latoBold: FontFamily? = typography.h1.fontFamily
-    val latoSemiBold: FontFamily? = typography.subtitle1.fontFamily
 
     // Use rememberUpdatedState to keep track of IconButton click state
     val iconButtonClicked by rememberUpdatedState(newValue = isMenuExpanded)
@@ -99,8 +80,13 @@ fun DropdownSection(
     Column(Modifier.padding(end = sz_spacing_cool)) {
         Text(
             text = title,
-            fontSize = sz_typo_font_size_cold,
-            fontFamily = latoBold,
+            style = TextStyle(
+                fontSize = sz_typo_font_size_frostbite,
+                lineHeight = sz_typo_line_height_iceAge,
+                fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                textAlign = TextAlign.Center,
+                letterSpacing = sz_typo_character_spacing_arctic.sp,
+            ),
             modifier = Modifier.padding(
                 sz_spacing_glacial,
                 sz_spacing_glacial,
@@ -123,7 +109,6 @@ fun DropdownSection(
                 modifier = Modifier
                     .padding(end = sz_spacing_glacial)
             ) {
-
                 TextField(
                     enabled = !isDisabled,
                     modifier = Modifier
@@ -131,30 +116,24 @@ fun DropdownSection(
                         .clickable {
                             // Toggle the menu expansion when the box is clicked
                             onMenuExpandedChange(!isMenuExpanded)
-                            Log.i("dropdown", "text field clicked, isMenuExpanded $isMenuExpanded")
                         }
                         .onFocusChanged {
                             if (it.isFocused) {
                                 // TextField gained focus, expand the menu
                                 onMenuExpandedChange(true)
-                                Log.i(
-                                    "dropdown",
-                                    "text field clicked has focus isMenuExpanded $isMenuExpanded"
-                                )
-                            } else {
-                                Log.i(
-                                    "dropdown",
-                                    "text field lost focus isMenuExpanded $isMenuExpanded"
-                                )
-                                //onMenuExpandedChange(false)
                             }
                         },
                     label = {
                         Text(
-                            text = "Label",
-                            color = sz_colour_datavis_5_1,
-                            fontSize = sz_typo_font_size_frigid,
-                            fontFamily = latoRegular
+                            text = Resources.strings.labelString,
+                            style = TextStyle(
+                                fontSize = sz_typo_font_size_frigid,
+                                lineHeight = sz_typo_line_height_iceAge,
+                                fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                                color = sz_colour_datavis_5_1,
+                                textAlign = TextAlign.Center,
+                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                            )
                         )
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -174,10 +153,10 @@ fun DropdownSection(
                         onMenuExpandedChange(false)
 
                     },
-                    textStyle = MaterialTheme.typography.body1.copy(
-                        fontSize = sz_typo_font_size_frigid,
-                        fontFamily = latoRegular
-                    ),
+                    textStyle =TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                    fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                ),
                     trailingIcon = {
                         Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null,
                             modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
@@ -196,9 +175,7 @@ fun DropdownSection(
                 IconText(
                     isError = isError, // Set to true to show the error icon and text in red
                     isSuccess = isSuccess,
-                    text = title,
-                    latoRegular = latoRegular
-                )
+                    text = title)
             }
         }
         // Dropdown menu positioned below the selected item box
@@ -222,24 +199,15 @@ fun DropdownSection(
                             onSelectedValueChange(item)
                             selectedValueRemembered = item
                             onMenuExpandedChange(false)
-                            Log.i(
-                                "dropdown",
-                                "drop down menu clicked and isMenuExpanded $isMenuExpanded"
-                            )
-
                             Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
                         }) {
                             Text(
                                 text = item,
                                 fontSize = sz_typo_font_size_frigid,
-                                fontFamily = latoRegular
+                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
                             )
                         }
                     }
-                    Log.i(
-                        "dropdown",
-                        "drop down menu not clicked and isMenuExpanded $isMenuExpanded"
-                    )
                 }
             }
         }
@@ -253,7 +221,6 @@ fun IconText(
     isError: Boolean,
     isSuccess: Boolean,
     text: String,
-    latoRegular: FontFamily?
 ) {
     Row(
         modifier = Modifier
@@ -279,16 +246,21 @@ fun IconText(
         }
 
         Text(
-            text = if (text == "Without Placeholder") {
+            text = if (text == Resources.strings.withOutPlaceholder) {
                 " "
             } else if (isSuccess) {
-                "Success message"
+                Resources.strings.errorMessage
             } else if (isError) {
-                "Error message"
+                Resources.strings.successMessage
             } else text,
-            color = if (isError) Color.Red else if (isSuccess) Color.Green else Color.Gray,
-            fontSize = sz_typo_font_size_frostbite,
-            fontFamily = latoRegular
+            style = TextStyle(
+                fontSize = sz_typo_font_size_frostbite,
+                lineHeight = sz_typo_line_height_iceAge,
+                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                textAlign = TextAlign.Center,
+                color = if (isError) Color.Red else if (isSuccess) Color.Green else Color.Gray,
+                letterSpacing = sz_typo_character_spacing_arctic.sp,
+            )
 
         )
     }

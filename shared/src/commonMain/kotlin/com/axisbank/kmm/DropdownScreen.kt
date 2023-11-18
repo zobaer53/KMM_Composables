@@ -20,6 +20,7 @@ import com.axisbank.dbat.arctic.ui.components.appBar.AppBar
 import com.axisbank.dbat.arctic.ui.components.appBar.AppbarTheme
 import com.axisbank.dbat.arctic.ui.theme.AppTheme
 import com.axisbank.dbat.arctic.ui.theme.ThemeViewModel
+import com.axisbank.kmm.resources.Resources
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -46,7 +47,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
         Scaffold(
             topBar = {
                 AppBar(
-                "Dropdown",
+                Resources.strings.dropdownString,
                 pressOnBack = { dropDownClick.invoke() },
                 Icons.Filled.ArrowBack,
                     AppbarTheme.BURGUNDY,isDarkMode
@@ -61,7 +62,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
                 ) {
                     // Enabled dropdown section
                     DropdownSection(
-                        title = "Enabled",
+                        title = Resources.strings.enabledString,
                         selectedValue = selectedValueEnabled,
                         onSelectedValueChange = { selectedValueEnabled = it },
                         isMenuExpanded = isMenuExpandedEnabled,
@@ -75,7 +76,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
 
                     // Disabled dropdown section
                     DropdownSection(
-                        title = "Disabled",
+                        title = Resources.strings.disabledString,
                         selectedValue = selectedValueDisabled,
                         onSelectedValueChange = { selectedValueDisabled = it },
                         isMenuExpanded = isMenuExpandedDisabled,
@@ -89,7 +90,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
 
                     // Error dropdown section
                     DropdownSection(
-                        title = "Error",
+                        title = Resources.strings.errorString,
                         selectedValue = selectedValueError,
                         onSelectedValueChange = { selectedValueError = it },
                         isMenuExpanded = isMenuExpandedError,
@@ -103,7 +104,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
 
                     // With Placeholder dropdown section
                     DropdownSection(
-                        title = "Success",
+                        title = Resources.strings.selectedString,
                         selectedValue = selectedValueSucess,
                         onSelectedValueChange = { selectedValueSucess = it },
                         isMenuExpanded = isMenuExpandedSuccess,
@@ -116,7 +117,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
                     )
                     // With Placeholder dropdown section
                     DropdownSection(
-                        title = "With Placeholder",
+                        title = Resources.strings.withPlaceholder,
                         selectedValue = selectedValueWithPlaceholder,
                         onSelectedValueChange = { selectedValueWithPlaceholder = it },
                         isMenuExpanded = isMenuExpandedWithPlaceholder,
@@ -130,7 +131,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
 
                     // Without Placeholder dropdown section
                     DropdownSection(
-                        title = "Without Helper",
+                        title = Resources.strings.withOutHelperString,
                         selectedValue = selectedValueWithoutPlaceholder,
                         onSelectedValueChange = { selectedValueWithoutPlaceholder = it },
                         isMenuExpanded = isMenuExpandedWithoutPlaceholder,

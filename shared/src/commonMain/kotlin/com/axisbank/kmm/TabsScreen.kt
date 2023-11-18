@@ -34,38 +34,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.axisbank.dbat.arctic.ui.components.appBar.AppBar
 import com.axisbank.dbat.arctic.ui.components.appBar.AppbarTheme
 import com.axisbank.dbat.arctic.ui.theme.AppTheme
 import com.axisbank.dbat.arctic.ui.theme.LightColors
 import com.axisbank.dbat.arctic.ui.theme.ThemeViewModel
+import com.axisbank.dbat.arctic.ui.theme.fab_icon_size_mini
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_color_stroke_secondary_selected
 import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_background
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_on_surface
+import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_mild
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
+import com.axisbank.dbat.arctic.ui.theme.sz_typo_character_spacing_arctic
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_blizzard
+import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_cold
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frigid
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frostbite
+import com.axisbank.dbat.arctic.ui.theme.sz_typo_line_height_iceAge
 import com.axisbank.kmm.TabSampleData
 import com.axisbank.kmm.TabSampleScrollableData
+import com.axisbank.kmm.resources.Resources
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
-    // Example of how to get FontFamily from Typography
-    val typography = getTypography()
-    val latoRegular: FontFamily? = typography.body1.fontFamily
-    val latoBold: FontFamily? = typography.h1.fontFamily
-    val latoSemiBold: FontFamily? = typography.subtitle1.fontFamily
 
 // You can access other text styles in a similar way
     val tabSampleData = TabSampleData()
@@ -88,7 +92,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
         Scaffold(
             topBar = {
                 AppBar(
-                    "Tabs",
+                    Resources.strings.tabsString,
                     pressOnBack = { tabsClick.invoke() },
                     Icons.Filled.ArrowBack,
                     AppbarTheme.BURGUNDY, themeViewModel) },
@@ -102,13 +106,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                 Column {
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Tabs",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultTabsString,
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                        ),
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
-                            sz_spacing_quickFreeze), fontFamily = latoSemiBold)
+                            sz_spacing_quickFreeze))
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     TabRow(
                         selectedTabIndex = selectedTabIndexEnabled,
@@ -129,7 +136,6 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 modifier = Modifier.padding(horizontal = sz_spacing_glacial),
                                 selectedContentColor = LightColors.primary
                             ) {
-
                                 Text(
                                     tabTitle, Modifier
                                         .padding(
@@ -138,11 +144,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             end = sz_spacing_cool,
                                             bottom = sz_spacing_frostbite
                                         ),
+                                            style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                    lineHeight = sz_typo_line_height_iceAge,
+                                    fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                                     color = if (selectedTabIndexEnabled == index) {
                                         LightColors.primary
                                     } else Color.Gray,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = latoRegular
+                                    textAlign = TextAlign.Center,
+                                    letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                )
                                 )
                             }
                         }
@@ -150,15 +161,17 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Tabs Disabled",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultTabsDisabledString,
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                        ),
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        ),
-                        fontFamily = latoSemiBold
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     TabRow(
@@ -183,23 +196,27 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             bottom = sz_spacing_frostbite
                                         ),
                                     color = Color.Gray,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = latoRegular
+                                    style = TextStyle(
+                                        fontSize = sz_typo_font_size_frigid,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                    )
                                 )
                             }
                         }
                     }
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Container Tabs",
-                        fontSize = sz_typo_font_size_frigid,
-                        modifier = Modifier.padding(
+                        text = Resources.strings.containerTabsString,
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                        ),
+                                modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        ),
-                        fontFamily = latoSemiBold
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -237,11 +254,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             top = sz_spacing_frostbite,
                                             bottom = sz_spacing_frostbite
                                         ),
-                                    color = if (containerTabIndexEnabled == index) {
-                                        sz_color_typo_action_tertiary
-                                    } else Color.Gray,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = latoRegular
+                                    style = TextStyle(
+                                        fontSize = sz_typo_font_size_frigid,
+                                        lineHeight = sz_typo_line_height_iceAge,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                        color = if (containerTabIndexEnabled == index) {
+                                            sz_color_typo_action_tertiary
+                                        } else Color.Gray,
+                                        textAlign = TextAlign.Center,
+                                        letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                    )
                                 )
                             }
                         }
@@ -249,15 +271,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Container Tabs Disabled",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.containerTabsDisabledString,
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        ),
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -288,24 +315,34 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             end = sz_spacing_cool,
                                             bottom = sz_spacing_frostbite
                                         ),
-                                    color = Color.Gray,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = latoRegular
+                                    style = TextStyle(
+                                        fontSize = sz_typo_font_size_frigid,
+                                        lineHeight = sz_typo_line_height_iceAge,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                        color = Color.Gray,
+                                        textAlign = TextAlign.Center,
+                                        letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                    )
                                 )
                             }
                         }
                     }
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Tabs With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultTabsWithAssetsString,
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        ),
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        ),
-                        fontFamily = latoSemiBold
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -339,13 +376,19 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
-                                        color = if (selectedTabIndexEnabledWithAssets == index) {
-                                            LightColors.primary
-                                        } else Color.Gray,
-                                        fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = latoRegular)
+                                        style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                            lineHeight = sz_typo_line_height_iceAge,
+                                            fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                            color = if (selectedTabIndexEnabledWithAssets == index) {
+                                                LightColors.primary
+                                            } else Color.Gray,
+                                            textAlign = TextAlign.Center,
+                                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                        )
+                                    )
                                     Spacer(modifier = Modifier.width(sz_spacing_frostbite))
-                                    Box(Modifier.size(18.dp)) {
+                                    Box(Modifier.size(fab_icon_size_mini)) {
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content descriptio
@@ -358,15 +401,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     }
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Container Tabs With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.containerTabsWithAssetsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -407,15 +455,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
-                                        color = if (containerTabIndexEnabledWithAssets == index) {
-                                            sz_color_typo_action_tertiary
-                                        } else Color.Gray,
-                                        fontSize = sz_typo_font_size_frostbite,
-                                        fontFamily = latoRegular
+                                        style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                            lineHeight = sz_typo_line_height_iceAge,
+                                            fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                            color = if (containerTabIndexEnabledWithAssets == index) {
+                                                sz_color_typo_action_tertiary
+                                            } else Color.Gray,
+                                            textAlign = TextAlign.Center,
+                                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                        )
                                     )
                                     Spacer(modifier = Modifier.width(sz_spacing_frostbite))
 
-                                    Box(Modifier.size(18.dp)) {
+                                    Box(Modifier.size(fab_icon_size_mini)) {
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null, // Set to null if you don't need a content description
@@ -427,15 +480,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     }
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Container Tabs Disabled With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.containerTabsDisabledWithAssetsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -470,12 +528,17 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     end = sz_spacing_cool)) {
                                     Text(
                                         tabTitle,
-                                        color = Color.Gray,
-                                        fontSize = sz_typo_font_size_frostbite,
-                                        fontFamily = latoRegular
+                                        style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                            lineHeight = sz_typo_line_height_iceAge,
+                                            fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                            color = Color.Gray,
+                                            textAlign = TextAlign.Center,
+                                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                        )
                                     )
                                     Spacer(modifier = Modifier.width(sz_spacing_frostbite))
-                                    Box(Modifier.size(18.dp)) {
+                                    Box(Modifier.size(fab_icon_size_mini)) {
                                         Image(
                                             imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                             contentDescription = null // Set to null if you don't need a content description
@@ -487,15 +550,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     }
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Scrollable Tabs",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultScrollableTabsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -527,11 +595,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             end = sz_spacing_cool,
                                             bottom = sz_spacing_frostbite
                                         ),
-                                    color = if (selectedScrollableTabIndexEnabled == index) {
-                                        LightColors.primary
-                                    } else Color.Gray,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = latoRegular
+                                    style = TextStyle(
+                                        fontSize = sz_typo_font_size_frigid,
+                                        lineHeight = sz_typo_line_height_iceAge,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                        color = if (selectedScrollableTabIndexEnabled == index) {
+                                            LightColors.primary
+                                        } else Color.Gray,
+                                        textAlign = TextAlign.Center,
+                                        letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                    )
                                 )
                             }
                         }
@@ -539,15 +612,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Scrollable Tabs Disabled",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultScrollableTabsDisabledString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     LazyRow(
@@ -575,9 +653,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                 end = sz_spacing_cool,
                                                 bottom = sz_spacing_quickFreeze
                                             ),
-                                        color = Color.Gray,
-                                        fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = latoRegular
+                                        style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                            lineHeight = sz_typo_line_height_iceAge,
+                                            fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                            color = Color.Gray,
+                                            textAlign = TextAlign.Center,
+                                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                        )
                                     )
                                 }
                             }
@@ -586,15 +669,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Scrollable Container Tabs",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.scrollableContainerTabsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
 
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
@@ -626,10 +714,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     Row {
                                         Text(
                                             tabTitle.uppercase(),
-                                            color = if (scrolledContainerTabIndexEnabled == index) {
-                                                sz_color_typo_action_tertiary
-                                            } else Color.Gray,
-                                            fontSize = sz_typo_font_size_blizzard,
+
                                             modifier = Modifier
                                                 .padding(
                                                     start = sz_spacing_mild,
@@ -637,7 +722,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                     bottom = sz_spacing_frostbite,
                                                     end = sz_spacing_mild
                                                 ),
-                                            fontFamily = latoRegular
+                                            style = TextStyle(
+                                                fontSize = sz_typo_font_size_blizzard,
+                                                lineHeight = sz_typo_line_height_iceAge,
+                                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                                color = if (scrolledContainerTabIndexEnabled == index) {
+                                                    sz_color_typo_action_tertiary
+                                                } else Color.Gray,
+                                                textAlign = TextAlign.Center,
+                                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                            )
                                         )
                                     }
                                 }
@@ -646,7 +740,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Disabled Scrollable Container",
+                        text = Resources.strings.disabledScrollableContainerString,
                         fontSize = sz_typo_font_size_frigid,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
@@ -654,7 +748,13 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -664,9 +764,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                 val tabTitle = tabItemsScrolable[index]
                                 Tab(
                                     selected = scrolledContainerTabIndexEnabledWithAssets == index,
-                                    onClick = {
-                                        //scrolledContainerTabIndexEnabledWithAssets = index
-                                    },
+                                    onClick = {},
                                     enabled = false,
                                     modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier.border(
                                         width = 1.dp, // Border width
@@ -678,9 +776,14 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     Row {
                                         Text(
                                             tabTitle.uppercase(),
-                                            color = Color.Gray,
-
-                                            fontSize = sz_typo_font_size_blizzard,
+                                            style = TextStyle(
+                                                fontSize = sz_typo_font_size_blizzard,
+                                                lineHeight = sz_typo_line_height_iceAge,
+                                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                                textAlign = TextAlign.Center,
+                                                color = Color.Gray,
+                                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                            ),
                                             modifier = Modifier
                                                 .padding(
                                                     start = sz_spacing_mild,
@@ -688,7 +791,6 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                     bottom = sz_spacing_frostbite,
                                                     end = sz_spacing_mild
                                                 ),
-                                            fontFamily = latoRegular
                                         )
                                     }
                                 }
@@ -697,15 +799,22 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Default Scrollable Tabs With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.defaultScrollableTabsWithAssetsString,
+                                style = TextStyle(
+                                fontSize = sz_typo_font_size_frigid,
+                        lineHeight = sz_typo_line_height_iceAge,
+                        fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                        textAlign = TextAlign.Center,
+                        color = Color.Gray,
+                        letterSpacing = sz_typo_character_spacing_arctic.sp,
+                    ),
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -739,14 +848,20 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
 
                                     Text(
                                         tabTitle,
-                                        color = if (defaultScrolledTabIndexEnabledWithAssets == index) {
-                                            LightColors.primary
-                                        } else Color.Gray,
                                         fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = latoRegular
+                                        style = TextStyle(
+                                            fontSize = sz_typo_font_size_frigid,
+                                            lineHeight = sz_typo_line_height_iceAge,
+                                            fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                            textAlign = TextAlign.Center,
+                                            color = if (defaultScrolledTabIndexEnabledWithAssets == index) {
+                                                LightColors.primary
+                                            } else Color.Gray,
+                                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                        )
                                     )
                                     Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
-                                    Box(Modifier.size(18.dp)) {
+                                    Box(Modifier.size(fab_icon_size_mini)) {
                                         Image(
                                             imageVector = Icons.Default.AccountBox,
                                             contentDescription = null
@@ -756,21 +871,22 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             }
                         }
                     }
-
-
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Scrollable Container Tabs With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.scrollableContainerTabsWithAssetsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
-                        ),
-                        fontFamily = latoSemiBold
+                        ),    style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
-
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     LazyRow(
                         content = {
@@ -804,11 +920,16 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         end = sz_spacing_cool)) {
                                         Text(
                                             tabTitle,
-                                            color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
-                                                sz_color_typo_action_tertiary
-                                            } else Color.Gray,
-                                            fontSize = sz_typo_font_size_frigid,
-                                            fontFamily = latoRegular
+                                            style = TextStyle(
+                                                fontSize = sz_typo_font_size_frigid,
+                                                lineHeight = sz_typo_line_height_iceAge,
+                                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                                textAlign = TextAlign.Center,
+                                                color = if (scrolledContainerTabIndexEnabledWithAssets == index) {
+                                                    sz_color_typo_action_tertiary
+                                                } else Color.Gray,
+                                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                            )
                                         )
                                         Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
                                         Box(Modifier.size(18.dp)) {
@@ -822,20 +943,22 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             }
                         }
                     )
-
-
-
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
                     Text(
-                        text = "Disabled Scrollable Container Tabs With Assets",
-                        fontSize = sz_typo_font_size_frigid,
+                        text = Resources.strings.disabledScrollableContainerTabsWithAssetsString,
                         modifier = Modifier.padding(
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_glacial,
                             sz_spacing_quickFreeze
                         ),
-                        fontFamily = latoSemiBold
+                        style = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            lineHeight = sz_typo_line_height_iceAge,
+                            fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                            textAlign = TextAlign.Center,
+                            letterSpacing = sz_typo_character_spacing_arctic.sp,
+                        )
                     )
                     Spacer(modifier = Modifier.height(sz_spacing_frostbite))
 
@@ -863,12 +986,17 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                         end = sz_spacing_cool)) {
                                         Text(
                                             tabTitle,
-                                            color = Color.Gray,
-                                            fontSize = sz_typo_font_size_frigid,
-                                            fontFamily = latoRegular
+                                            style = TextStyle(
+                                                fontSize = sz_typo_font_size_frigid,
+                                                lineHeight = sz_typo_line_height_iceAge,
+                                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
+                                                textAlign = TextAlign.Center,
+                                                color = Color.Gray,
+                                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                            )
                                         )
                                         Spacer(modifier = Modifier.width(sz_spacing_quickFreeze))
-                                        Box(Modifier.size(18.dp)) {
+                                        Box(Modifier.size(fab_icon_size_mini)) {
                                             Image(
                                                 imageVector = Icons.Default.AccountBox, // Replace with the desired icon from Icons
                                                 contentDescription = null // Set to null if you don't need a content description
