@@ -32,6 +32,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
@@ -42,6 +43,7 @@ import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
+import com.axisbank.dbat.arctic.ui.theme.sz_spacing_bitterCold
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite1
@@ -53,6 +55,8 @@ import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_line_height_iceAge
 import com.axisbank.kmm.resources.Resources
 import getStyle
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -153,10 +157,10 @@ fun DropdownSection(
                         onMenuExpandedChange(false)
 
                     },
-                    textStyle =TextStyle(
-                            fontSize = sz_typo_font_size_frigid,
-                    fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                ),
+                    textStyle = TextStyle(
+                        fontSize = sz_typo_font_size_frigid,
+                        fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                    ),
                     trailingIcon = {
                         Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null,
                             modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
@@ -175,7 +179,8 @@ fun DropdownSection(
                 IconText(
                     isError = isError, // Set to true to show the error icon and text in red
                     isSuccess = isSuccess,
-                    text = title)
+                    text = title
+                )
             }
         }
         // Dropdown menu positioned below the selected item box
@@ -216,6 +221,7 @@ fun DropdownSection(
 }
 
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun IconText(
     isError: Boolean,
@@ -225,23 +231,23 @@ fun IconText(
     Row(
         modifier = Modifier
             .padding(
-                start = sz_spacing_frostbite1
+                top = sz_spacing_glacial
             )
     ) {
-        val icon = if (isError) {
-            Icons.Default.Warning
+        val icon: Painter? = if (isError) {
+            painterResource("drawable/error_icon.xml")
         } else if (isSuccess) {
-            Icons.Default.CheckCircle
+            painterResource("drawable/success_icon.xml")
         } else null
 
         icon?.let {
             Icon(
-                imageVector = it,
+                painter = it,
                 contentDescription = null, // Provide an appropriate content description
                 tint = if (isError) Color.Red else Color.Green,
                 modifier = Modifier
-                    .size(sz_spacing_frostbite1)
-                    .padding(end = sz_spacing_quickFreeze)
+                    .size(sz_spacing_bitterCold)
+                    //.padding(end = sz_spacing_quickFreeze)
             )
         }
 
@@ -249,9 +255,9 @@ fun IconText(
             text = if (text == Resources.strings.withOutPlaceholder) {
                 " "
             } else if (isSuccess) {
-                Resources.strings.errorMessage
-            } else if (isError) {
                 Resources.strings.successMessage
+            } else if (isError) {
+                Resources.strings.errorMessage
             } else text,
             style = TextStyle(
                 fontSize = sz_typo_font_size_frostbite,

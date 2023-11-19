@@ -32,9 +32,9 @@ kotlin {
             dependencies {implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
-                implementation(project(":subzero"))
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                implementation(project(":subzero"))
                 implementation("com.chrynan.navigation:navigation-compose:0.10.0")
 
                 //put your multiplatform dependencies here
@@ -56,6 +56,8 @@ android {
     }
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res", "src/commonMain/resources")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
 }
 dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview-android:1.5.3")

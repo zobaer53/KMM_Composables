@@ -56,6 +56,8 @@ android {
         named("main") {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
             res.srcDirs("src/commonMain/resources") // <============= here
+           resources.srcDirs("src/commonMain/resources")
+
         }
     }
 }
