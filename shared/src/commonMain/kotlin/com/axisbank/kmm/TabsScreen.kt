@@ -254,6 +254,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
+                                //container dimens from subzero
                                 modifier = Modifier
                                     .widthIn(min =tabs_min_width)
                                     .height(height_container_tab)
@@ -327,8 +328,11 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                       containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
-                                modifier = Modifier.widthIn(min =tabs_min_width)
-                                    .height(height_container_tab).padding(horizontal = sz_spacing_glacial)
+                                //container dimens from subzero
+                                modifier = Modifier
+                                    .widthIn(min =tabs_min_width)
+                                    .height(height_container_tab)
+                                    .padding(horizontal = sz_spacing_glacial)
                             ) {
                                 Text(
                                     tabTitle, Modifier
@@ -461,9 +465,11 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     containerClicked != containerClicked
                                 },
                                 selectedContentColor = Color.Transparent,
+                                //container dimens from subzero
                                 modifier = Modifier
                                     .widthIn(min =tabs_min_width)
-                                    .height(height_container_tab).padding(end = sz_spacing_frostbite) then
+                                    .height(height_container_tab)
+                                    .padding(end = sz_spacing_frostbite) then
                                         Modifier.border(
                                             width = 1.dp,
                                             color = if (containerTabIndexEnabledWithAssets == index) {
@@ -543,6 +549,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                       containerClicked != containerClicked*/
                                 },
                                 selectedContentColor = Color.Transparent,
+                                //container dimens from subzero
                                 modifier = Modifier
                                     .widthIn(min = tabs_min_width)
                                     .height(height_container_tab)
@@ -758,6 +765,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             )
                                 ) {
 
+                                    //container dimens from subzero
                                     Box(
                                         modifier = Modifier
                                             .widthIn(min = tabs_min_width)
@@ -826,6 +834,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                     selectedContentColor = Color.Transparent
                                 ) {
 
+                                    //container dimens from subzero
                                     Box(
                                         modifier = Modifier
                                             .widthIn(min = tabs_min_width)
@@ -981,6 +990,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                                 } else Color.Transparent
                                             )
                                 ) {
+                                    //container dimens from subzero
                                     Box(
                                         Modifier
                                             .widthIn(min =tabs_min_width)
@@ -1062,6 +1072,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                                             ).background(Color.Transparent),
                                     selectedContentColor = Color.Transparent
                                 ) {
+                                    //container dimens from subzero
                                     Box(
                                         Modifier
                                             .widthIn(min =tabs_min_width)
