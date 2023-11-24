@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
+import com.axisbank.dbat.arctic.ui.theme.sz_color_state_disabled_surface
+import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_disabled
 import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_bitterCold
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
@@ -166,7 +168,7 @@ fun DropdownSection(
                             modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
                     },
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = sz_color_neutral_1,
+                        backgroundColor = if(isDisabled) sz_color_state_disabled_surface else sz_color_neutral_1,
                         focusedIndicatorColor =
                         if (iconButtonClicked)
                             sz_color_icon_action_tertiary
