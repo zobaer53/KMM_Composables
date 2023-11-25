@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.axisbank.dbat.arctic.ui.theme.fab_icon_size_mini
@@ -46,7 +47,12 @@ fun ContainerTabRow(
     onTabSelected: (Int) -> Unit,
     containerClicked: Boolean,
     enabled: Boolean,
-    asset: Boolean
+    asset: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH: Dp,
+    CONTAINER_STYLE_INDICATOR_PADDING : Dp,
+    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES :Color,
+    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES : Color
 ) {
     TabRow(
         selectedTabIndex = selectedTabIndex,
@@ -68,7 +74,12 @@ fun ContainerTabRow(
                         onTabSelected(index)
                     },
                     tabTitle = tabTitle,
-                    enabled = enabled
+                    enabled = enabled,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
             } else {
                 ContainerTabWithAsset(
@@ -81,7 +92,12 @@ fun ContainerTabRow(
                         onTabSelected(index)
                     },
                     tabTitle = tabTitle,
-                    enabled = enabled
+                    enabled = enabled,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                    CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES ,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
             }
         }
@@ -93,20 +109,26 @@ fun ContainerTab(
     selected: Boolean,
     onClick: () -> Unit,
     tabTitle: String,
-    enabled: Boolean
+    enabled: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH:  Dp,
+    CONTAINER_STYLE_INDICATOR_PADDING :Dp,
+    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES :Color,
+    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES : Color
 ) {
     Tab(
         enabled = enabled,
         selected = selected,
         onClick = onClick,
         selectedContentColor = Color.Transparent,
-        modifier = Modifier.widthIn(min = tabs_min_width)
-            .height(height_container_tab).padding(end = sz_spacing_glacial)
+        modifier = Modifier.widthIn(min = CONTAINER_STYLE_INDICATOR_WIDTH)
+            .height(CONTAINER_STYLE_INDICATOR_HEIGHT)
+            .padding(end = CONTAINER_STYLE_INDICATOR_PADDING)
             .border(
                 width = if (enabled) 1.dp else 1.dp,
                 color = if (selected && enabled) {
-                    sz_color_typo_action_tertiary
-                } else if (!enabled) Color.Transparent else Color.Gray,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
+                } else if (!enabled) Color.Transparent else CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
                 shape = RoundedCornerShape(sz_spacing_quickFreeze)
             ).background(
                 if (selected && enabled) {
@@ -121,8 +143,8 @@ fun ContainerTab(
                 lineHeight = sz_typo_line_height_iceAge,
                 fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                 color = if (selected) {
-                    sz_color_typo_action_tertiary
-                } else Color.Gray,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
+                } else CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
                 textAlign = TextAlign.Center,
                 letterSpacing = sz_typo_character_spacing_arctic.sp,
             )
@@ -136,20 +158,26 @@ fun ContainerTabWithAsset(
     selected: Boolean,
     onClick: () -> Unit,
     tabTitle: String,
-    enabled: Boolean
+    enabled: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH: Dp,
+    CONTAINER_STYLE_INDICATOR_PADDING : Dp,
+    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES :Color,
+    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES : Color
 ) {
     Tab(
         enabled = enabled,
         selected = selected,
         onClick = onClick,
         selectedContentColor = Color.Transparent,
-        modifier = Modifier.widthIn(min = tabs_min_width)
-            .height(height_container_tab).padding(end = sz_spacing_glacial)
+        modifier = Modifier.widthIn(min = CONTAINER_STYLE_INDICATOR_WIDTH)
+            .height(CONTAINER_STYLE_INDICATOR_HEIGHT)
+            .padding(end = sz_spacing_glacial)
             .border(
                 width = if (enabled) 1.dp else 1.dp,
                 color = if (selected && enabled) {
-                    sz_color_typo_action_tertiary
-                } else if (!enabled) Color.Transparent else Color.Gray,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
+                } else if (!enabled) Color.Transparent else CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
                 shape = RoundedCornerShape(sz_spacing_quickFreeze)
             ).background(
                 if (selected && enabled) {
@@ -171,8 +199,8 @@ fun ContainerTabWithAsset(
                     lineHeight = sz_typo_line_height_iceAge,
                     fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                     color = if (selected) {
-                        sz_color_typo_action_tertiary
-                    } else Color.Gray,
+                        CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
+                    } else CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
                     textAlign = TextAlign.Center,
                     letterSpacing = sz_typo_character_spacing_arctic.sp
                 )

@@ -29,8 +29,10 @@ import com.axisbank.dbat.arctic.ui.components.appBar.AppbarTheme
 import com.axisbank.dbat.arctic.ui.theme.AppTheme
 import com.axisbank.dbat.arctic.ui.theme.LightColors
 import com.axisbank.dbat.arctic.ui.theme.ThemeViewModel
+import com.axisbank.dbat.arctic.ui.theme.height_container_tab
 import com.axisbank.dbat.arctic.ui.theme.height_standard_tab
 import com.axisbank.dbat.arctic.ui.theme.sz_color_surface_background
+import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
@@ -56,18 +58,35 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
     val tabSampleData = TabSampleData()
     val tabScrollableSampleData = TabSampleScrollableData()
     val tabItems = tabSampleData.getSampleItems()
-    val tabItemsScrolable = tabScrollableSampleData.getSampleItems()
-    var selectedTabIndexEnabled by remember { mutableIntStateOf(0) }
-    var selectedTabIndexEnabledClicked by remember { mutableStateOf(false) }
-    var selectedTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
-    var selectedScrollableTabIndexEnabled by remember { mutableIntStateOf(0) }
+
+
+    /*CONTAINER VARIANT*/
+    val CONTAINER_STYLE_INDICATOR_PADDING = sz_spacing_glacial
+    val CONTAINER_STYLE_INDICATOR_HEIGHT = height_container_tab
+    val CONTAINER_STYLE_INDICATOR_WIDTH = tabs_min_width
+    val CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES = sz_color_typo_action_tertiary
+    val CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES = Color.Gray
+    val containerClicked by remember { mutableStateOf(false) }
     var containerTabIndexEnabled by remember { mutableIntStateOf(0) }
     var containerTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
+
+
+    /*COMMON*/
+     val DEFAULT_IS_INDICATOR_ANIM_ENABLE = false
+    var selectedTabIndexDisabled by remember { mutableIntStateOf(0) }
+    var selectedTabIndexEnabled by remember { mutableIntStateOf(0) }
+    val selectedTabIndexEnabledClicked by remember { mutableStateOf(false) }
+    var selectedTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
+
+
+    /*SCROLLABLE*/
+    var defaultScrolledTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
     var scrolledContainerTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
     var scrolledContainerTabIndexEnabled by remember { mutableIntStateOf(0) }
-    var defaultScrolledTabIndexEnabledWithAssets by remember { mutableIntStateOf(0) }
-    var selectedTabIndexDisabled by remember { mutableIntStateOf(0) }
-    var containerClicked by remember { mutableStateOf(false) }
+    var selectedScrollableTabIndexEnabled by remember { mutableIntStateOf(0) }
+    val tabItemsScrolable = tabScrollableSampleData.getSampleItems()
+
+
 
     AppTheme(false, themeViewModel.isDarkMode) {
         Scaffold(
@@ -116,7 +135,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    enabled = true,
+                    DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     textColor = Color.Gray
                 )
 
@@ -143,7 +162,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    enabled = false,
+                    !DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     textColor = Color.Gray,
 
                     )
@@ -172,7 +191,12 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     },
                     containerClicked = containerClicked,
                     enabled = true,
-                    asset = false
+                    asset = false,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                    CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
 
 
@@ -206,7 +230,12 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     },
                     containerClicked = containerClicked,
                     enabled = false,
-                    asset = false
+                    asset = false,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                    CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
 
                 // default tabs with assets
@@ -262,7 +291,12 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     },
                     containerClicked = containerClicked,
                     enabled = true,
-                    asset = true
+                    asset = true,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                    CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
 
                 Spacer(modifier = Modifier.height(sz_spacing_frostbite))
@@ -293,7 +327,12 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     },
                     containerClicked = containerClicked,
                     enabled = false,
-                    asset = true
+                    asset = true,
+                    CONTAINER_STYLE_INDICATOR_HEIGHT,
+                    CONTAINER_STYLE_INDICATOR_WIDTH,
+                    CONTAINER_STYLE_INDICATOR_PADDING,
+                    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
+                    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                 )
 
                 // Example of using a function to create a ScrollableTabRow
@@ -321,7 +360,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    enabled = true,
+                    !DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     asset = false
                 )
 
@@ -349,7 +388,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    enabled = false,
+                    DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     asset = false
                 )
                 Spacer(modifier = Modifier.height(sz_spacing_frostbite))
@@ -380,7 +419,10 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             selected = scrolledContainerTabIndexEnabled == index,
                             onTabSelected = { scrolledContainerTabIndexEnabled = index },
                             containerClicked = containerClicked,
-                            asset = false
+                            asset = false,
+                            CONTAINER_STYLE_INDICATOR_HEIGHT,
+                            CONTAINER_STYLE_INDICATOR_WIDTH,
+                            CONTAINER_STYLE_INDICATOR_PADDING
                         )
                     }
                 })
@@ -413,6 +455,9 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             onTabSelected = { scrolledContainerTabIndexEnabled = index },
                             containerClicked = containerClicked,
                             asset = false,
+                            CONTAINER_STYLE_INDICATOR_HEIGHT,
+                            CONTAINER_STYLE_INDICATOR_WIDTH,
+                            CONTAINER_STYLE_INDICATOR_PADDING
                         )
                     }
                 })
@@ -443,7 +488,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    enabled = true,
+                    !DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     asset = true
                 )
 
@@ -477,6 +522,9 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             onTabSelected = { scrolledContainerTabIndexEnabledWithAssets = index },
                             containerClicked = containerClicked,
                             asset = true,
+                            CONTAINER_STYLE_INDICATOR_HEIGHT,
+                            CONTAINER_STYLE_INDICATOR_WIDTH,
+                            CONTAINER_STYLE_INDICATOR_PADDING
                         )
                     }
                 })
@@ -511,6 +559,9 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                             onTabSelected = { defaultScrolledTabIndexEnabledWithAssets = index },
                             containerClicked = containerClicked,
                             asset = true,
+                            CONTAINER_STYLE_INDICATOR_HEIGHT,
+                            CONTAINER_STYLE_INDICATOR_WIDTH,
+                            CONTAINER_STYLE_INDICATOR_PADDING
                         )
                     }
                 })

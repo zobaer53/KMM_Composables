@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.axisbank.dbat.arctic.ui.theme.default_margin
-import com.axisbank.dbat.arctic.ui.theme.height_container_tab
 import com.axisbank.dbat.arctic.ui.theme.height_standard_tab
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
@@ -52,7 +51,7 @@ fun ScrollableTabRowComponent(
     backgroundColor: Color,
     tabMinWidth: Dp,
     spacing: Dp,
-    enabled: Boolean,
+    DEFAULT_IS_INDICATOR_ANIM_ENABLE: Boolean,
     asset: Boolean
 ) {
     // Implementation of ScrollableTabRow
@@ -65,15 +64,15 @@ fun ScrollableTabRowComponent(
     ) {
         tabItems.forEachIndexed { index, tabTitle ->
             Tab(
-                selected = if (!enabled) enabled else selectedTabIndex == index,
+                selected = if (!DEFAULT_IS_INDICATOR_ANIM_ENABLE) DEFAULT_IS_INDICATOR_ANIM_ENABLE else selectedTabIndex == index,
                 onClick = {
-                    if (!enabled) {
+                    if (!DEFAULT_IS_INDICATOR_ANIM_ENABLE) {
 
                     } else {
                         onTabClick(index)
                     }
                 },
-                enabled = enabled,
+                enabled = DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                 modifier = Modifier.padding(horizontal = spacing),
                 selectedContentColor = Color.Transparent
             ) {
@@ -82,7 +81,7 @@ fun ScrollableTabRowComponent(
                         tabMinWidth,
                         spacing,
                         tabTitle,
-                        enabled,
+                        DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                         selectedTabIndex,
                         index,
                         contentColor
@@ -185,7 +184,10 @@ fun ScrollableContainerTabAssets(
     selected: Boolean,
     onTabSelected: () -> Unit,
     containerClicked: Boolean,
-    asset: Boolean
+    asset: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH: Dp,
+    CONTAINER_STYLE_INDICATOR_PADDING : Dp
 ) {
     Tab(
         enabled = enabled,
@@ -210,18 +212,30 @@ fun ScrollableContainerTabAssets(
     ) {
         // Container dimensions from subzero
         if (!asset) {
-            ScrollableContainer(tabTitle, selected, enabled)
+            ScrollableContainer(
+                tabTitle, selected, enabled,
+                CONTAINER_STYLE_INDICATOR_HEIGHT,
+                CONTAINER_STYLE_INDICATOR_WIDTH
+            )
         } else {
-            ScrollableContainerWithAsset(tabTitle, selected, enabled)
+            ScrollableContainerWithAsset(
+                tabTitle, selected, enabled,
+                CONTAINER_STYLE_INDICATOR_HEIGHT,
+                CONTAINER_STYLE_INDICATOR_WIDTH
+            )
         }
     }
 }
 
 @Composable
-fun ScrollableContainer(tabTitle: String, selected: Boolean, enabled: Boolean) {
+fun ScrollableContainer(
+    tabTitle: String, selected: Boolean, enabled: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH: Dp
+) {
     Box(
-        modifier = Modifier.widthIn(min = tabs_min_width)
-            .height(height_container_tab).padding(
+        modifier = Modifier.widthIn(min = CONTAINER_STYLE_INDICATOR_WIDTH)
+            .height(CONTAINER_STYLE_INDICATOR_HEIGHT).padding(
                 start = sz_spacing_mild,
                 top = sz_spacing_frostbite,
                 bottom = sz_spacing_frostbite,
@@ -245,11 +259,15 @@ fun ScrollableContainer(tabTitle: String, selected: Boolean, enabled: Boolean) {
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun ScrollableContainerWithAsset(tabTitle: String, selected: Boolean, enabled: Boolean) {
+fun ScrollableContainerWithAsset(
+    tabTitle: String, selected: Boolean, enabled: Boolean,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
+    CONTAINER_STYLE_INDICATOR_WIDTH: Dp
+) {
     Row(
         Modifier
-            .widthIn(min = tabs_min_width)
-            .height(height_container_tab).padding(
+            .widthIn(min = CONTAINER_STYLE_INDICATOR_WIDTH)
+            .height(CONTAINER_STYLE_INDICATOR_HEIGHT).padding(
                 start = sz_spacing_cool,
                 top = sz_spacing_frostbite,
                 bottom = sz_spacing_frostbite,

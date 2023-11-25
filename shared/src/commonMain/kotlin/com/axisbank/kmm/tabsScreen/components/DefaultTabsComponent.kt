@@ -42,7 +42,7 @@ fun DefaultTabsComponent(
     backgroundColor: Color,
     tabMinWidth: Dp,
     spacing: Dp,
-    enabled: Boolean,
+    DEFAULT_IS_INDICATOR_ANIM_ENABLE: Boolean,
     textColor: Color
 ) {
     // Implementation of TabRow
@@ -54,9 +54,9 @@ fun DefaultTabsComponent(
     ) {
         tabItems.forEachIndexed { index, tabTitle ->
             Tab(
-                selected = if(!enabled) {enabled }else {selectedTabIndex == index},
+                selected = if(!DEFAULT_IS_INDICATOR_ANIM_ENABLE) {DEFAULT_IS_INDICATOR_ANIM_ENABLE }else {selectedTabIndex == index},
                 onClick = { onTabClick(index) },
-                enabled = enabled,
+                enabled = DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                 modifier = Modifier
                     .widthIn(min = tabMinWidth)
                     .height(height)
@@ -71,7 +71,7 @@ fun DefaultTabsComponent(
                         end = spacing,
                         bottom = spacing
                     ),
-                    color = if(!enabled) textColor else if (selectedTabIndex == index) selectedContentColor else textColor,
+                    color = if(!DEFAULT_IS_INDICATOR_ANIM_ENABLE) textColor else if (selectedTabIndex == index) selectedContentColor else textColor,
                     fontSize = sz_typo_font_size_frigid,
                     fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
                 )

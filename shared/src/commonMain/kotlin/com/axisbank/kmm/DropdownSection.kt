@@ -20,8 +20,6 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,12 +41,10 @@ import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_color_state_disabled_surface
-import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_disabled
 import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_bitterCold
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
-import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_character_spacing_arctic
@@ -80,8 +76,17 @@ fun DropdownSection(
     val iconButtonClicked by rememberUpdatedState(newValue = isMenuExpanded)
     var selectedValueRemembered by remember { mutableStateOf(selectedValue) }
 
-    var imeAction by remember { mutableStateOf(ImeAction.Done) }
-    var keyboardController by remember { mutableStateOf<SoftwareKeyboardController?>(null) }
+    val imeAction by remember { mutableStateOf(ImeAction.Done) }
+    val keyboardController by remember { mutableStateOf<SoftwareKeyboardController?>(null) }
+    val defaultHelperText = Resources.strings.withOutPlaceholder
+    val defaultLabel = Resources.strings.labelString
+    val errorText = Resources.strings.errorMessage
+    val successText = Resources.strings.successMessage
+     val colorError = Color.Red
+     val colorSuccess = Color.Green
+    val colorHelper = Color.Gray
+    val isHelperEnabled = noPlaceHolder
+
 
     Column(Modifier.padding(end = sz_spacing_cool)) {
         Text(
@@ -131,7 +136,7 @@ fun DropdownSection(
                         },
                     label = {
                         Text(
-                            text = Resources.strings.labelString,
+                            text =defaultLabel ,
                             style = TextStyle(
                                 fontSize = sz_typo_font_size_frigid,
                                 lineHeight = sz_typo_line_height_iceAge,
@@ -177,11 +182,17 @@ fun DropdownSection(
                     )
                 )
             }
-            if (noPlaceHolder == false) {
+            if (isHelperEnabled == false) {
                 IconText(
                     isError = isError, // Set to true to show the error icon and text in red
                     isSuccess = isSuccess,
-                    text = title
+                    text = title,
+                    defaultHelperText,
+                    errorText,
+                    successText,
+                    colorError,
+                    colorSuccess,
+                    colorHelper
                 )
             }
         }
@@ -221,14 +232,18 @@ fun DropdownSection(
     }
     Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
-
-
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun IconText(
     isError: Boolean,
     isSuccess: Boolean,
     text: String,
+    defaultHelperText: String,
+    errorText: String,
+    successText: String,
+    colorError: Color,
+    colorSuccess: Color,
+    colorHelper: Color,
 ) {
     Row(
         modifier = Modifier
@@ -246,30 +261,27 @@ fun IconText(
             Icon(
                 painter = it,
                 contentDescription = null, // Provide an appropriate content description
-                tint = if (isError) Color.Red else Color.Green,
+                tint = if (isError) colorError  else colorSuccess,
                 modifier = Modifier
                     .size(sz_spacing_bitterCold)
-                    //.padding(end = sz_spacing_quickFreeze)
             )
         }
-
         Text(
-            text = if (text == Resources.strings.withOutPlaceholder) {
+            text = if (text == defaultHelperText ) {
                 " "
             } else if (isSuccess) {
-                Resources.strings.successMessage
+                successText
             } else if (isError) {
-                Resources.strings.errorMessage
+                errorText
             } else text,
             style = TextStyle(
                 fontSize = sz_typo_font_size_frostbite,
                 lineHeight = sz_typo_line_height_iceAge,
                 fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                 textAlign = TextAlign.Center,
-                color = if (isError) Color.Red else if (isSuccess) Color.Green else Color.Gray,
+                color = if (isError) colorError else if (isSuccess) colorSuccess else colorHelper,
                 letterSpacing = sz_typo_character_spacing_arctic.sp,
             )
-
         )
     }
 }
