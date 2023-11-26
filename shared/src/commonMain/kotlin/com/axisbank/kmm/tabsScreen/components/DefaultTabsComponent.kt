@@ -71,7 +71,7 @@ fun DefaultTabsComponent(
                         end = spacing,
                         bottom = spacing
                     ),
-                    color = if(!DEFAULT_IS_INDICATOR_ANIM_ENABLE) textColor else if (selectedTabIndex == index) selectedContentColor else textColor,
+                    color = if(DEFAULT_IS_INDICATOR_ANIM_ENABLE) textColor else if (selectedTabIndex == index) selectedContentColor else textColor,
                     fontSize = sz_typo_font_size_frigid,
                     fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
                 )
