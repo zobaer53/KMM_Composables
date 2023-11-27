@@ -61,7 +61,7 @@ fun DefaultTabsComponent(
                     .widthIn(min = tabMinWidth)
                     .height(height)
                     .padding(horizontal = spacing),
-                selectedContentColor = selectedContentColor
+                selectedContentColor = backgroundColor
             ) {
                 Text(
                     tabTitle,
@@ -107,7 +107,7 @@ fun DefaultTabsComponentWithAssets(
                             color = Color.Transparent,
                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
                         ),
-                selectedContentColor = contentColor
+                selectedContentColor = backgroundColor
             ) {
                 Row(
                     Modifier

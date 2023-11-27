@@ -135,7 +135,7 @@ fun TabsScreen(tabsClick: () -> Unit, themeViewModel: ThemeViewModel) {
                     backgroundColor = sz_color_surface_background,
                     tabMinWidth = tabs_min_width,
                     spacing = sz_spacing_glacial,
-                    DEFAULT_IS_INDICATOR_ANIM_ENABLE,
+                    !DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                     textColor = Color.Gray
                 )
 
