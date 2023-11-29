@@ -197,7 +197,7 @@ fun ScrollableContainerTabAssets(
             containerClicked != containerClicked
         },
         selectedContentColor = Color.Transparent,
-        modifier = Modifier.padding(sz_spacing_glacial) then Modifier
+        modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier
             .border(
                 width = if (enabled) 1.dp else 1.dp,
                 color = if (selected && enabled) {

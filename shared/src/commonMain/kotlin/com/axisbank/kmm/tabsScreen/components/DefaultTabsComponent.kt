@@ -101,7 +101,7 @@ fun DefaultTabsComponentWithAssets(
                 onClick = { onTabClick(index) },
                 enabled = true,
                 modifier = Modifier
-                    .padding(end = sz_spacing_glacial) then
+                    .padding(horizontal =  sz_spacing_glacial) then
                         Modifier.border(
                             width = 1.dp,
                             color = Color.Transparent,
