@@ -16,6 +16,7 @@ import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -236,11 +237,11 @@ fun ScrollableContainer(
     Box(
         modifier = Modifier.widthIn(min = CONTAINER_STYLE_INDICATOR_WIDTH)
             .height(CONTAINER_STYLE_INDICATOR_HEIGHT).padding(
-                start = sz_spacing_mild,
+
                 top = sz_spacing_frostbite,
                 bottom = sz_spacing_frostbite,
-                end = sz_spacing_mild
-            )
+            ),
+        contentAlignment = Alignment.Center
     ) {
         Text(
             tabTitle.uppercase(),
@@ -272,17 +273,15 @@ fun ScrollableContainerWithAsset(
                 top = sz_spacing_frostbite,
                 bottom = sz_spacing_frostbite,
                 end = sz_spacing_cool
-            )
+            ),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             tabTitle.uppercase(),
             style = TextStyle(
-                fontSize = sz_typo_font_size_blizzard,
-                lineHeight = sz_typo_line_height_iceAge,
+                fontSize = sz_typo_font_size_frigid,
                 fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                 color = if (selected && enabled) sz_color_typo_action_tertiary else Color.Gray,
-                textAlign = TextAlign.Center,
-                letterSpacing = sz_typo_character_spacing_arctic.sp,
             )
         )
         Spacer(modifier = Modifier.width(sz_spacing_frostbite))
