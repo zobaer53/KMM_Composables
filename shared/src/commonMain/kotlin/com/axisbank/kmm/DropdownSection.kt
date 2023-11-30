@@ -1,6 +1,7 @@
 package com.axisbank.kmm
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -186,6 +187,44 @@ fun DropdownSection(
                         )
                     )
                 }
+                // Dropdown menu positioned below the selected item box
+                if (isMenuExpanded && !isDisabled) {
+                    Box(
+                        Modifier
+                            .background(Color.Transparent)
+                    ) {
+                        DropdownMenu(
+                            expanded = isMenuExpanded,
+                            modifier = Modifier
+                                .widthIn(min = 280.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                            // .background(Color.Gray)
+                            , // Add padding here
+                            onDismissRequest = { onMenuExpandedChange(false) },
+                            properties = PopupProperties(
+                                focusable = true,
+                                dismissOnBackPress = true,
+                                dismissOnClickOutside = true
+                            )
+                        ) {
+                            items.subList(1, items.size).forEach { item ->
+                                DropdownMenuItem(onClick = {
+                                    onSelectedValueChange(item)
+                                    selectedValueRemembered = item
+                                    onMenuExpandedChange(false)
+                                    Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
+                                }) {
+                                    Text(
+                                        text = item,
+                                        fontSize = sz_typo_font_size_frigid,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
                 if (isHelperEnabled == false) {
                     IconText(
                         isError = isError, // Set to true to show the error icon and text in red
@@ -200,44 +239,10 @@ fun DropdownSection(
                     )
                 }
             }
-            // Dropdown menu positioned below the selected item box
-            if (isMenuExpanded && !isDisabled) {
-
-                Box(Modifier.padding(start = 20.dp, end = 20.dp)) {
-                DropdownMenu(
-                    expanded = isMenuExpanded,
-                    modifier = Modifier
-                        .widthIn(min = 280.dp)
-                        .clip(RoundedCornerShape(20.dp))
-                        , // Add padding here
-                    onDismissRequest = { onMenuExpandedChange(false) },
-                    properties = PopupProperties(
-                        focusable = true,
-                        dismissOnBackPress = true,
-                        dismissOnClickOutside = true
-                    )
-                ) {
-                    items.subList(1, items.size).forEach { item ->
-                        DropdownMenuItem(onClick = {
-                            onSelectedValueChange(item)
-                            selectedValueRemembered = item
-                            onMenuExpandedChange(false)
-                            Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
-                        }) {
-                            Text(
-                                text = item,
-                                fontSize = sz_typo_font_size_frigid,
-                                fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
-                            )
-                        }
-                    }
-                }
-
-            }
-
         }
-    }
-    Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
+
+
+            Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
 @OptIn(ExperimentalResourceApi::class)
 @Composable
