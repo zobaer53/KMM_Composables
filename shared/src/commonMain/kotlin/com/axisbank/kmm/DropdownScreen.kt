@@ -58,7 +58,7 @@ fun DropdownScreen(dropDownClick: () -> Unit, isDarkMode1: ThemeViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState())
-                        .padding(20.dp)
+                        .padding(start=20.dp, end = 20.dp)
                 ) {
                     // Enabled dropdown section
                     DropdownSection(

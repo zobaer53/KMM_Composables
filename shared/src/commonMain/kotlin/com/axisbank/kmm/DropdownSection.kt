@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -28,6 +30,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -36,6 +39,7 @@ import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
@@ -88,7 +92,7 @@ fun DropdownSection(
     val isHelperEnabled = noPlaceHolder
 
 
-    Column(Modifier.padding(end = sz_spacing_cool)) {
+    Column(Modifier.padding()) {
         Text(
             text = title,
             style = TextStyle(
@@ -196,14 +200,14 @@ fun DropdownSection(
                 )
             }
         }
-        // Dropdown menu positioned below the selected item box
+// Dropdown menu positioned below the selected item box
         if (isMenuExpanded && !isDisabled) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
                 DropdownMenu(
                     expanded = isMenuExpanded,
+                    modifier = Modifier
+                        .widthIn(min= 330.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .padding(start = 40.dp, end = 20.dp), // Add padding here
                     onDismissRequest = { onMenuExpandedChange(false) },
                     properties = PopupProperties(
                         focusable = true,
@@ -211,7 +215,6 @@ fun DropdownSection(
                         dismissOnClickOutside = true
                     )
                 ) {
-
                     items.subList(1, items.size).forEach { item ->
                         DropdownMenuItem(onClick = {
                             onSelectedValueChange(item)
@@ -227,8 +230,9 @@ fun DropdownSection(
                         }
                     }
                 }
-            }
+
         }
+
     }
     Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
