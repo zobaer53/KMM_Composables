@@ -91,123 +91,125 @@ fun DropdownSection(
     val colorHelper = Color.Gray
     val isHelperEnabled = noPlaceHolder
 
-
-    Column(Modifier.padding()) {
-        Text(
-            text = title,
-            style = TextStyle(
-                fontSize = sz_typo_font_size_frostbite,
-                lineHeight = sz_typo_line_height_iceAge,
-                fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
-                textAlign = TextAlign.Center,
-                letterSpacing = sz_typo_character_spacing_arctic.sp,
-            ),
-            modifier = Modifier.padding(
-                sz_spacing_glacial,
-                sz_spacing_glacial,
-                sz_spacing_glacial,
-                sz_spacing_quickFreeze
-            )
-        )
-        Spacer(
-            modifier = Modifier
-                .height(sz_spacing_frostbite)
-        )
-        Column(
-            modifier = Modifier
-                .padding(
-                    start = sz_spacing_cool,
-                    top = sz_spacing_frostbite
+        Column(Modifier.padding()) {
+            Text(
+                text = title,
+                style = TextStyle(
+                    fontSize = sz_typo_font_size_frostbite,
+                    lineHeight = sz_typo_line_height_iceAge,
+                    fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                    textAlign = TextAlign.Center,
+                    letterSpacing = sz_typo_character_spacing_arctic.sp,
+                ),
+                modifier = Modifier.padding(
+                    sz_spacing_glacial,
+                    sz_spacing_glacial,
+                    sz_spacing_glacial,
+                    sz_spacing_quickFreeze
                 )
-        ) {
-            Box(
+            )
+            Spacer(
                 modifier = Modifier
-                    .padding(end = sz_spacing_glacial)
+                    .height(sz_spacing_frostbite)
+            )
+            Column(
+                modifier = Modifier
+                    .padding(
+                        start = sz_spacing_cool,
+                        top = sz_spacing_frostbite
+                    )
             ) {
-                TextField(
-                    enabled = !isDisabled,
+                Box(
                     modifier = Modifier
                         .padding(end = sz_spacing_glacial)
-                        .clickable {
-                            // Toggle the menu expansion when the box is clicked
-                            onMenuExpandedChange(!isMenuExpanded)
-                        }
-                        .onFocusChanged {
-                            if (it.isFocused) {
-                                // TextField gained focus, expand the menu
-                                onMenuExpandedChange(true)
+                ) {
+                    TextField(
+                        enabled = !isDisabled,
+                        modifier = Modifier
+                            .padding(end = sz_spacing_glacial)
+                            .clickable {
+                                // Toggle the menu expansion when the box is clicked
+                                onMenuExpandedChange(!isMenuExpanded)
                             }
-                        },
-                    label = {
-                        Text(
-                            text =defaultLabel ,
-                            style = TextStyle(
-                                fontSize = sz_typo_font_size_frigid,
-                                lineHeight = sz_typo_line_height_iceAge,
-                                fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                                color = sz_colour_datavis_5_1,
-                                textAlign = TextAlign.Center,
-                                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                            .onFocusChanged {
+                                if (it.isFocused) {
+                                    // TextField gained focus, expand the menu
+                                    onMenuExpandedChange(true)
+                                }
+                            },
+                        label = {
+                            Text(
+                                text = defaultLabel,
+                                style = TextStyle(
+                                    fontSize = sz_typo_font_size_frigid,
+                                    lineHeight = sz_typo_line_height_iceAge,
+                                    fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                                    color = sz_colour_datavis_5_1,
+                                    textAlign = TextAlign.Center,
+                                    letterSpacing = sz_typo_character_spacing_arctic.sp,
+                                )
                             )
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = imeAction
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = imeAction
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                onMenuExpandedChange(false)
+                                keyboardController?.hide()
+                            }
+                        ),
+                        isError = isError,
+                        value = selectedValueRemembered,
+                        onValueChange = {
+                            selectedValueRemembered = it
+                            onSelectedValueChange(selectedValueRemembered)
                             onMenuExpandedChange(false)
-                            keyboardController?.hide()
-                        }
-                    ),
-                    isError = isError,
-                    value = selectedValueRemembered,
-                    onValueChange = {
-                        selectedValueRemembered = it
-                        onSelectedValueChange(selectedValueRemembered)
-                        onMenuExpandedChange(false)
 
-                    },
-                    textStyle = TextStyle(
-                        fontSize = sz_typo_font_size_frigid,
-                        fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                    ),
-                    trailingIcon = {
-                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null,
-                            modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
-                    },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = if(isDisabled) sz_color_state_disabled_surface else sz_color_neutral_1,
-                        focusedIndicatorColor =
-                        if (iconButtonClicked)
-                            sz_color_icon_action_tertiary
-                        else sz_color_icon_action_tertiary,
-                        unfocusedIndicatorColor = if (isError) Color.Red else Color.Gray
+                        },
+                        textStyle = TextStyle(
+                            fontSize = sz_typo_font_size_frigid,
+                            fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                        ),
+                        trailingIcon = {
+                            Icon(imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = if (isDisabled) sz_color_state_disabled_surface else sz_color_neutral_1,
+                            focusedIndicatorColor =
+                            if (iconButtonClicked)
+                                sz_color_icon_action_tertiary
+                            else sz_color_icon_action_tertiary,
+                            unfocusedIndicatorColor = if (isError) Color.Red else Color.Gray
+                        )
                     )
-                )
+                }
+                if (isHelperEnabled == false) {
+                    IconText(
+                        isError = isError, // Set to true to show the error icon and text in red
+                        isSuccess = isSuccess,
+                        text = title,
+                        defaultHelperText,
+                        errorText,
+                        successText,
+                        colorError,
+                        colorSuccess,
+                        colorHelper
+                    )
+                }
             }
-            if (isHelperEnabled == false) {
-                IconText(
-                    isError = isError, // Set to true to show the error icon and text in red
-                    isSuccess = isSuccess,
-                    text = title,
-                    defaultHelperText,
-                    errorText,
-                    successText,
-                    colorError,
-                    colorSuccess,
-                    colorHelper
-                )
-            }
-        }
-// Dropdown menu positioned below the selected item box
-        if (isMenuExpanded && !isDisabled) {
+            // Dropdown menu positioned below the selected item box
+            if (isMenuExpanded && !isDisabled) {
+
+                Box(Modifier.padding(start = 20.dp, end = 20.dp)) {
                 DropdownMenu(
                     expanded = isMenuExpanded,
                     modifier = Modifier
-                        .widthIn(min= 330.dp)
+                        .widthIn(min = 280.dp)
                         .clip(RoundedCornerShape(20.dp))
-                        .padding(start = 20.dp, end = 20.dp), // Add padding here
+                        , // Add padding here
                     onDismissRequest = { onMenuExpandedChange(false) },
                     properties = PopupProperties(
                         focusable = true,
@@ -231,8 +233,9 @@ fun DropdownSection(
                     }
                 }
 
-        }
+            }
 
+        }
     }
     Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
