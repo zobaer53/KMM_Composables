@@ -207,7 +207,7 @@ fun DropdownSection(
                     modifier = Modifier
                         .widthIn(min= 330.dp)
                         .clip(RoundedCornerShape(20.dp))
-                        .padding(start = 40.dp, end = 20.dp), // Add padding here
+                        .padding(start = 20.dp, end = 20.dp), // Add padding here
                     onDismissRequest = { onMenuExpandedChange(false) },
                     properties = PopupProperties(
                         focusable = true,
