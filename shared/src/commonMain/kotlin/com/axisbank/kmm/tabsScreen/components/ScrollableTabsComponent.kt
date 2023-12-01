@@ -31,7 +31,6 @@ import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_frostbite
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_glacial
-import com.axisbank.dbat.arctic.ui.theme.sz_spacing_mild
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_quickFreeze
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_character_spacing_arctic
 import com.axisbank.dbat.arctic.ui.theme.sz_typo_font_size_blizzard
@@ -53,7 +52,7 @@ fun ScrollableTabRowComponent(
     tabMinWidth: Dp,
     spacing: Dp,
     DEFAULT_IS_INDICATOR_ANIM_ENABLE: Boolean,
-    asset: Boolean
+    TABS_ASSET: Boolean
 ) {
     // Implementation of ScrollableTabRow
     ScrollableTabRow(
@@ -77,7 +76,7 @@ fun ScrollableTabRowComponent(
                 modifier = Modifier.padding(horizontal = spacing),
                 selectedContentColor = Color.Transparent
             ) {
-                if (!asset) {
+                if (!TABS_ASSET) {
                     DefaultScrollableTabs(
                         tabMinWidth,
                         spacing,
@@ -179,48 +178,48 @@ fun DefaultScrollableTabsWithAssets(
 
 @Composable
 fun ScrollableContainerTabAssets(
-    index: Int,
+    selectedTabIndex: Int,
     tabTitle: String,
-    enabled: Boolean,
+    DEFAULT_IS_INDICATOR_ANIM_ENABLE: Boolean,
     selected: Boolean,
-    onTabSelected: () -> Unit,
+    onTabClick: (Int) -> Unit,
     containerClicked: Boolean,
-    asset: Boolean,
+    TABS_ASSET: Boolean,
     CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
     CONTAINER_STYLE_INDICATOR_WIDTH: Dp,
-    CONTAINER_STYLE_INDICATOR_PADDING : Dp
+    CONTAINER_STYLE_INDICATOR_PADDING: Dp
 ) {
     Tab(
-        enabled = enabled,
+        enabled = DEFAULT_IS_INDICATOR_ANIM_ENABLE,
         selected = selected,
         onClick = {
-            onTabSelected()
+            onTabClick(0)
             containerClicked != containerClicked
         },
         selectedContentColor = Color.Transparent,
         modifier = Modifier.padding(horizontal = sz_spacing_glacial) then Modifier
             .border(
-                width = if (enabled) 1.dp else 1.dp,
-                color = if (selected && enabled) {
+                width = if (DEFAULT_IS_INDICATOR_ANIM_ENABLE) 1.dp else 1.dp,
+                color = if (selected && DEFAULT_IS_INDICATOR_ANIM_ENABLE) {
                     sz_color_typo_action_tertiary
-                } else if (!enabled) Color.Transparent else Color.Gray,
+                } else if (!DEFAULT_IS_INDICATOR_ANIM_ENABLE) Color.Transparent else Color.Gray,
                 shape = RoundedCornerShape(sz_spacing_quickFreeze)
             ).background(
-                if (selected && enabled) {
+                if (selected && DEFAULT_IS_INDICATOR_ANIM_ENABLE) {
                     sz_color_neutral_1
                 } else Color.Transparent
             )
     ) {
         // Container dimensions from subzero
-        if (!asset) {
+        if (!TABS_ASSET) {
             ScrollableContainer(
-                tabTitle, selected, enabled,
+                tabTitle, selected, DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                 CONTAINER_STYLE_INDICATOR_HEIGHT,
                 CONTAINER_STYLE_INDICATOR_WIDTH
             )
         } else {
             ScrollableContainerWithAsset(
-                tabTitle, selected, enabled,
+                tabTitle, selected, DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                 CONTAINER_STYLE_INDICATOR_HEIGHT,
                 CONTAINER_STYLE_INDICATOR_WIDTH
             )

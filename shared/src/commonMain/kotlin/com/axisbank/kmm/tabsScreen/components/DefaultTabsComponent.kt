@@ -37,18 +37,18 @@ fun DefaultTabsComponent(
     selectedTabIndex: Int,
     tabItems: List<String>,
     onTabClick: (Int) -> Unit,
-    height: Dp,
+    CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
     selectedContentColor: Color,
-    backgroundColor: Color,
+    CONTAINER_STYLE_BACKGROUND_COLOR_RES: Color,
     tabMinWidth: Dp,
     spacing: Dp,
     DEFAULT_IS_INDICATOR_ANIM_ENABLE: Boolean,
-    textColor: Color
+    CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES: Color
 ) {
     // Implementation of TabRow
     TabRow(
         selectedTabIndex = selectedTabIndex,
-        backgroundColor = backgroundColor,
+        backgroundColor = CONTAINER_STYLE_BACKGROUND_COLOR_RES,
         divider = { Spacer(modifier = Modifier.height(sz_spacing_frostbite)) },
         contentColor = selectedContentColor
     ) {
@@ -59,9 +59,9 @@ fun DefaultTabsComponent(
                 enabled = DEFAULT_IS_INDICATOR_ANIM_ENABLE,
                 modifier = Modifier
                     .widthIn(min = tabMinWidth)
-                    .height(height)
+                    .height(CONTAINER_STYLE_INDICATOR_HEIGHT)
                     .padding(horizontal = spacing),
-                selectedContentColor = backgroundColor
+                selectedContentColor = CONTAINER_STYLE_BACKGROUND_COLOR_RES
             ) {
                 Text(
                     tabTitle,
@@ -71,7 +71,9 @@ fun DefaultTabsComponent(
                         end = spacing,
                         bottom = spacing
                     ),
-                    color = if(DEFAULT_IS_INDICATOR_ANIM_ENABLE) textColor else if (selectedTabIndex == index) selectedContentColor else textColor,
+                    color = if(DEFAULT_IS_INDICATOR_ANIM_ENABLE) CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES
+                    else if (selectedTabIndex == index) selectedContentColor
+                    else CONTAINER_STYLE_TEXT_UNSELECTED_COLOR_RES,
                     fontSize = sz_typo_font_size_frigid,
                     fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
                 )
@@ -86,14 +88,14 @@ fun DefaultTabsComponentWithAssets(
     selectedTabIndex: Int,
     tabItems: List<String>,
     onTabClick: (Int) -> Unit,
-    backgroundColor: Color,
-    contentColor: Color
+    COMMON_TABS_STYLE_BACKGROUND_COLOR_RES: Color,
+    CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES: Color
 ) {
     TabRow(
         selectedTabIndex = selectedTabIndex,
-        backgroundColor = backgroundColor,
+        backgroundColor = COMMON_TABS_STYLE_BACKGROUND_COLOR_RES,
         divider = { Spacer(modifier = Modifier.height(sz_spacing_frostbite)) },
-        contentColor = contentColor
+        contentColor = CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
     ) {
         tabItems.forEachIndexed { index, tabTitle ->
             Tab(
@@ -107,7 +109,7 @@ fun DefaultTabsComponentWithAssets(
                             color = Color.Transparent,
                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
                         ),
-                selectedContentColor = backgroundColor
+                selectedContentColor = COMMON_TABS_STYLE_BACKGROUND_COLOR_RES
             ) {
                 Row(
                     Modifier
@@ -125,7 +127,7 @@ fun DefaultTabsComponentWithAssets(
                             fontSize = sz_typo_font_size_frigid,
                             fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily,
                             color = if (selectedTabIndex == index) {
-                                contentColor
+                                CONTAINER_STYLE_TEXT_SELECTED_COLOR_RES
                             } else Color.Gray,
                         )
                     )

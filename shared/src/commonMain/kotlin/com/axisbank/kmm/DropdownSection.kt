@@ -92,7 +92,7 @@ fun DropdownSection(
     val colorHelper = Color.Gray
     val isHelperEnabled = noPlaceHolder
 
-        Column(Modifier.padding()) {
+        Column() {
             Text(
                 text = title,
                 style = TextStyle(

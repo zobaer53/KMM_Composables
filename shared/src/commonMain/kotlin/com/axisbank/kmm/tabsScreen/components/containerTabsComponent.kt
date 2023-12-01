@@ -47,7 +47,7 @@ fun ContainerTabRow(
     onTabSelected: (Int) -> Unit,
     containerClicked: Boolean,
     enabled: Boolean,
-    asset: Boolean,
+    TABS_ASSET: Boolean,
     CONTAINER_STYLE_INDICATOR_HEIGHT: Dp,
     CONTAINER_STYLE_INDICATOR_WIDTH: Dp,
     CONTAINER_STYLE_INDICATOR_PADDING : Dp,
@@ -63,7 +63,7 @@ fun ContainerTabRow(
         contentColor = Color.Transparent
     ) {
         tabItems.forEachIndexed { index, tabTitle ->
-            if (!asset) {
+            if (!TABS_ASSET) {
                 ContainerTab(
                     selected = if (!enabled) {
                         enabled
