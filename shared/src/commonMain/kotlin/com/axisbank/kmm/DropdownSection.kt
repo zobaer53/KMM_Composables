@@ -2,6 +2,7 @@ package com.axisbank.kmm
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -44,8 +46,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_action_tertiary
+import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_negative
+import com.axisbank.dbat.arctic.ui.theme.sz_color_icon_positive
 import com.axisbank.dbat.arctic.ui.theme.sz_color_neutral_1
 import com.axisbank.dbat.arctic.ui.theme.sz_color_state_disabled_surface
+import com.axisbank.dbat.arctic.ui.theme.sz_color_typo_action_tertiary
 import com.axisbank.dbat.arctic.ui.theme.sz_colour_datavis_5_1
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_bitterCold
 import com.axisbank.dbat.arctic.ui.theme.sz_spacing_cool
@@ -87,163 +92,177 @@ fun DropdownSection(
     val defaultLabel = Resources.strings.labelString
     val errorText = Resources.strings.errorMessage
     val successText = Resources.strings.successMessage
-     val colorError = Color.Red
-     val colorSuccess = Color.Green
+    val colorError = sz_color_icon_negative
+    val colorSuccess = sz_color_icon_positive
     val colorHelper = Color.Gray
     val isHelperEnabled = noPlaceHolder
 
-        Column() {
-            Text(
-                text = title,
-                style = TextStyle(
-                    fontSize = sz_typo_font_size_frostbite,
-                    lineHeight = sz_typo_line_height_iceAge,
-                    fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
-                    textAlign = TextAlign.Center,
-                    letterSpacing = sz_typo_character_spacing_arctic.sp,
-                ),
-                modifier = Modifier.padding(
-                    sz_spacing_glacial,
-                    sz_spacing_glacial,
-                    sz_spacing_glacial,
-                    sz_spacing_quickFreeze
+    Column {
+        Text(
+            text = title,
+            style = TextStyle(
+                fontSize = sz_typo_font_size_frostbite,
+                lineHeight = sz_typo_line_height_iceAge,
+                fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
+                textAlign = TextAlign.Center,
+                letterSpacing = sz_typo_character_spacing_arctic.sp,
+                color = if(isError) colorError else if (isSuccess) colorSuccess else colorHelper
+            ),
+            modifier = Modifier.padding(
+                sz_spacing_glacial,
+                sz_spacing_glacial,
+                sz_spacing_glacial,
+                sz_spacing_quickFreeze
+            )
+        )
+        Spacer(
+            modifier = Modifier
+                .height(sz_spacing_frostbite)
+        )
+        Column(
+            modifier = Modifier
+                .padding(
+                    start = sz_spacing_cool,
+                    top = sz_spacing_frostbite
                 )
-            )
-            Spacer(
+        ) {
+            Box(
                 modifier = Modifier
-                    .height(sz_spacing_frostbite)
-            )
-            Column(
-                modifier = Modifier
-                    .padding(
-                        start = sz_spacing_cool,
-                        top = sz_spacing_frostbite
-                    )
+                    .padding(end = sz_spacing_glacial)
             ) {
-                Box(
+                TextField(
+                    enabled = !isDisabled,
                     modifier = Modifier
                         .padding(end = sz_spacing_glacial)
-                ) {
-                    TextField(
-                        enabled = !isDisabled,
-                        modifier = Modifier
-                            .padding(end = sz_spacing_glacial)
-                            .clickable {
-                                // Toggle the menu expansion when the box is clicked
-                                onMenuExpandedChange(!isMenuExpanded)
-                            }
-                            .onFocusChanged {
-                                if (it.isFocused) {
-                                    // TextField gained focus, expand the menu
-                                    onMenuExpandedChange(true)
-                                }
-                            },
-                        label = {
-                            Text(
-                                text = defaultLabel,
-                                style = TextStyle(
-                                    fontSize = sz_typo_font_size_frigid,
-                                    lineHeight = sz_typo_line_height_iceAge,
-                                    fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                                    color = sz_colour_datavis_5_1,
-                                    textAlign = TextAlign.Center,
-                                    letterSpacing = sz_typo_character_spacing_arctic.sp,
-                                )
-                            )
-                        },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            imeAction = imeAction
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                onMenuExpandedChange(false)
-                                keyboardController?.hide()
-                            }
-                        ),
-                        isError = isError,
-                        value = selectedValueRemembered,
-                        onValueChange = {
-                            selectedValueRemembered = it
-                            onSelectedValueChange(selectedValueRemembered)
-                            onMenuExpandedChange(false)
-
-                        },
-                        textStyle = TextStyle(
-                            fontSize = sz_typo_font_size_frigid,
-                            fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                        ),
-                        trailingIcon = {
-                            Icon(imageVector = Icons.Default.ArrowDropDown,
-                                contentDescription = null,
-                                modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) })
-                        },
-                        colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = if (isDisabled) sz_color_state_disabled_surface else sz_color_neutral_1,
-                            focusedIndicatorColor =
-                            if (iconButtonClicked)
-                                sz_color_icon_action_tertiary
-                            else sz_color_icon_action_tertiary,
-                            unfocusedIndicatorColor = if (isError) Color.Red else Color.Gray
+                        .border(
+                            width = if (isError || isSuccess) 1.dp else 0.dp,
+                            color = if (isError) {
+                                colorError
+                            } else if (isSuccess) colorSuccess else Color.Transparent,
+                            shape = RoundedCornerShape(sz_spacing_quickFreeze)
+                        ).background(
+                            if (isError) {
+                                colorError
+                            } else if (isSuccess) colorSuccess else Color.Transparent
                         )
-                    )
-                }
-                // Dropdown menu positioned below the selected item box
-                if (isMenuExpanded && !isDisabled) {
-                    Box(
-                        Modifier
-                            .background(Color.Transparent)
-                    ) {
-                        DropdownMenu(
-                            expanded = isMenuExpanded,
-                            modifier = Modifier
-                                .widthIn(min = 280.dp)
-                                .clip(RoundedCornerShape(10.dp))
-                            // .background(Color.Gray)
-                            , // Add padding here
-                            onDismissRequest = { onMenuExpandedChange(false) },
-                            properties = PopupProperties(
-                                focusable = true,
-                                dismissOnBackPress = true,
-                                dismissOnClickOutside = true
+                        .clickable {
+                            // Toggle the menu expansion when the box is clicked
+                            onMenuExpandedChange(!isMenuExpanded)
+                        }
+                        .onFocusChanged {
+                            if (it.isFocused) {
+                                // TextField gained focus, expand the menu
+                                onMenuExpandedChange(true)
+                            }
+                        },
+                    label = {
+                        Text(
+                            text = defaultLabel,
+                            style = TextStyle(
+                                fontSize = sz_typo_font_size_frigid,
+                                lineHeight = sz_typo_line_height_iceAge,
+                                fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                                color = sz_colour_datavis_5_1,
+                                textAlign = TextAlign.Center,
+                                letterSpacing = sz_typo_character_spacing_arctic.sp,
                             )
-                        ) {
-                            items.subList(1, items.size).forEach { item ->
-                                DropdownMenuItem(onClick = {
-                                    onSelectedValueChange(item)
-                                    selectedValueRemembered = item
-                                    onMenuExpandedChange(false)
-                                    Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
-                                }) {
-                                    Text(
-                                        text = item,
-                                        fontSize = sz_typo_font_size_frigid,
-                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
-                                    )
-                                }
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = imeAction
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            onMenuExpandedChange(false)
+                            keyboardController?.hide()
+                        }
+                    ),
+                    isError = isError,
+                    value = selectedValueRemembered,
+                    onValueChange = {
+                        selectedValueRemembered = it
+                        onSelectedValueChange(selectedValueRemembered)
+                        onMenuExpandedChange(false)
+
+                    },
+                    textStyle = TextStyle(
+                        fontSize = sz_typo_font_size_frigid,
+                        fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                    ),
+                    trailingIcon = {
+                        Icon(imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = null,
+                            modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) },
+                            tint = colorHelper)
+                    },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = if (isDisabled) sz_color_state_disabled_surface else sz_color_neutral_1,
+                        focusedIndicatorColor =
+                        if (iconButtonClicked)
+                            sz_color_icon_action_tertiary
+                        else sz_color_icon_action_tertiary,
+                        unfocusedIndicatorColor = if (isError) Color.Red else Color.Gray
+                    )
+                )
+            }
+            // Dropdown menu positioned below the selected item box
+            if (isMenuExpanded && !isDisabled) {
+                Box(
+                    Modifier
+                        .background(Color.Transparent)
+                ) {
+                    DropdownMenu(
+                        expanded = isMenuExpanded,
+                        modifier = Modifier
+                            .widthIn(min = 280.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                        // .background(Color.Gray)
+                        , // Add padding here
+                        onDismissRequest = { onMenuExpandedChange(false) },
+                        properties = PopupProperties(
+                            focusable = true,
+                            dismissOnBackPress = true,
+                            dismissOnClickOutside = true
+                        )
+                    ) {
+                        items.subList(1, items.size).forEach { item ->
+                            DropdownMenuItem(onClick = {
+                                onSelectedValueChange(item)
+                                selectedValueRemembered = item
+                                onMenuExpandedChange(false)
+                                Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
+                            }) {
+                                Text(
+                                    text = item,
+                                    fontSize = sz_typo_font_size_frigid,
+                                    fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
+                                )
                             }
                         }
                     }
                 }
+            }
 
-                if (isHelperEnabled == false) {
-                    IconText(
-                        isError = isError, // Set to true to show the error icon and text in red
-                        isSuccess = isSuccess,
-                        text = title,
-                        defaultHelperText,
-                        errorText,
-                        successText,
-                        colorError,
-                        colorSuccess,
-                        colorHelper
-                    )
-                }
+            if (isHelperEnabled == false) {
+                IconText(
+                    isError = isError, // Set to true to show the error icon and text in red
+                    isSuccess = isSuccess,
+                    text = title,
+                    defaultHelperText,
+                    errorText,
+                    successText,
+                    colorError,
+                    colorSuccess,
+                    colorHelper
+                )
             }
         }
+    }
 
 
-            Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
+    Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
+
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun IconText(
@@ -273,13 +292,15 @@ fun IconText(
             Icon(
                 painter = it,
                 contentDescription = null, // Provide an appropriate content description
-                tint = if (isError) colorError  else colorSuccess,
+                tint = if (isError) colorError else colorSuccess,
                 modifier = Modifier
                     .size(sz_spacing_bitterCold)
             )
         }
+        Spacer(Modifier.width(6.dp))
+
         Text(
-            text = if (text == defaultHelperText ) {
+            text = if (text == defaultHelperText) {
                 " "
             } else if (isSuccess) {
                 successText
