@@ -140,12 +140,7 @@ fun DropdownSection(
                                 colorError
                             } else if (isSuccess) colorSuccess else Color.Transparent,
                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
-                        ).background(
-                            if (isError) {
-                                colorError
-                            } else if (isSuccess) colorSuccess else Color.Transparent
-                        )
-                        .clickable {
+                        ).clickable {
                             // Toggle the menu expansion when the box is clicked
                             onMenuExpandedChange(!isMenuExpanded)
                         }
