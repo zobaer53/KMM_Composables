@@ -1,5 +1,7 @@
 package com.axisbank.kmm
 
+
+
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -65,6 +67,25 @@ import com.axisbank.kmm.resources.Resources
 import getStyle
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.runtime.*
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
+import com.axisbank.dbat.arctic.ui.theme.*
+import getStyle
+import org.jetbrains.compose.resources.painterResource
+
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -96,6 +117,7 @@ fun DropdownSection(
     val colorSuccess = sz_color_icon_positive
     val colorHelper = Color.Gray
     val isHelperEnabled = noPlaceHolder
+    var searchText by remember { mutableStateOf(TextFieldValue(selectedValue)) }
 
     Column {
         Text(
@@ -106,7 +128,7 @@ fun DropdownSection(
                 fontFamily = getStyle().SZ_Typo_Display_Bold_Large.fontFamily,
                 textAlign = TextAlign.Center,
                 letterSpacing = sz_typo_character_spacing_arctic.sp,
-                color = if(isError) colorError else if (isSuccess) colorSuccess else colorHelper
+                color =  colorHelper
             ),
             modifier = Modifier.padding(
                 sz_spacing_glacial,
@@ -115,10 +137,11 @@ fun DropdownSection(
                 sz_spacing_quickFreeze
             )
         )
-        Spacer(
+     /*   Spacer(
             modifier = Modifier
                 .height(sz_spacing_frostbite)
-        )
+        )*/
+
         Column(
             modifier = Modifier
                 .padding(
@@ -126,10 +149,31 @@ fun DropdownSection(
                     top = sz_spacing_frostbite
                 )
         ) {
+            Text(
+                text = defaultLabel,
+                style = TextStyle(
+                    fontSize = sz_typo_font_size_frigid,
+                    lineHeight = sz_typo_line_height_iceAge,
+                    fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
+                    color = if(isError) colorError else if (isSuccess) colorSuccess else colorHelper,
+                    textAlign = TextAlign.Center,
+                    letterSpacing = sz_typo_character_spacing_arctic.sp,
+                ),
+                modifier = Modifier.padding(
+                    sz_spacing_glacial,
+                    sz_spacing_glacial,
+                    sz_spacing_quickFreeze
+                )
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(sz_spacing_frostbite)
+            )
             Box(
                 modifier = Modifier
                     .padding(end = sz_spacing_glacial)
             ) {
+
                 TextField(
                     enabled = !isDisabled,
                     modifier = Modifier
@@ -144,26 +188,13 @@ fun DropdownSection(
                             // Toggle the menu expansion when the box is clicked
                             onMenuExpandedChange(!isMenuExpanded)
                         }
-                        .onFocusChanged {
+                      /*  .onFocusChanged {
                             if (it.isFocused) {
                                 // TextField gained focus, expand the menu
                                 onMenuExpandedChange(true)
                             }
-                        },
-                    label = {
-                        Text(
-                            text = defaultLabel,
-                            style = TextStyle(
-                                fontSize = sz_typo_font_size_frigid,
-                                lineHeight = sz_typo_line_height_iceAge,
-                                fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
-                                color = sz_colour_datavis_5_1,
-                                textAlign = TextAlign.Center,
-                                letterSpacing = sz_typo_character_spacing_arctic.sp,
-                            )
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
+                        }*/,
+                   /* keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = imeAction
                     ),
                     keyboardActions = KeyboardActions(
@@ -171,14 +202,26 @@ fun DropdownSection(
                             onMenuExpandedChange(false)
                             keyboardController?.hide()
                         }
-                    ),
+                    ),*/
                     isError = isError,
-                    value = selectedValueRemembered,
+                /*    value = selectedValueRemembered,
                     onValueChange = {
                         selectedValueRemembered = it
                         onSelectedValueChange(selectedValueRemembered)
                         onMenuExpandedChange(false)
 
+                    }*/
+                            value = searchText,
+                    onValueChange = {
+                        searchText = it
+                        // You can filter suggestions based on the entered text here
+                        // For example, you can filter items that start with the entered text
+                        val filteredSuggestions = items.subList(1, items.size).filter { suggestion ->
+                            suggestion.startsWith(it.text, ignoreCase = true)
+                        }
+                        // Update the suggestions based on the filtered list
+                        // and expand the menu
+                        onMenuExpandedChange(filteredSuggestions.isNotEmpty())
                     },
                     textStyle = TextStyle(
                         fontSize = sz_typo_font_size_frigid,
@@ -214,16 +257,16 @@ fun DropdownSection(
                         // .background(Color.Gray)
                         , // Add padding here
                         onDismissRequest = { onMenuExpandedChange(false) },
-                        properties = PopupProperties(
+                      /*  properties = PopupProperties(
                             focusable = true,
                             dismissOnBackPress = true,
                             dismissOnClickOutside = true
-                        )
+                        )*/
                     ) {
                         items.subList(1, items.size).forEach { item ->
                             DropdownMenuItem(onClick = {
                                 onSelectedValueChange(item)
-                                selectedValueRemembered = item
+                                searchText = TextFieldValue(item)
                                 onMenuExpandedChange(false)
                                 Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
                             }) {
@@ -257,6 +300,10 @@ fun DropdownSection(
 
     Spacer(modifier = Modifier.height(sz_spacing_quickFreeze))
 }
+
+
+
+
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable

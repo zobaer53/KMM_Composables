@@ -2,7 +2,7 @@ package com.axisbank.kmm
 
 class DropdownSampleData {
     fun getSampleItems(): List<String> {
-        return listOf("","Monday", "Tuesday", "Wednesday", "Thursday")
+        return listOf("Placeholder Text","Monday", "Tuesday", "Wednesday", "Thursday")
     }
 }
 
