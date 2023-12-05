@@ -120,6 +120,7 @@ fun DropdownSection(
     val isHelperEnabled = noPlaceHolder
     var searchText by remember { mutableStateOf(TextFieldValue(selectedValue)) }
     var filteredSuggestions: String = ""
+    var iconButtonClick by remember { mutableStateOf(false) }
 
     Column {
         Text(
@@ -189,6 +190,7 @@ fun DropdownSection(
                         ).clickable {
                             // Toggle the menu expansion when the box is clicked
                             onMenuExpandedChange(!isMenuExpanded)
+                            iconButtonClick = false
                         }
                       /*  .onFocusChanged {
                             if (it.isFocused) {
@@ -213,6 +215,7 @@ fun DropdownSection(
                         onMenuExpandedChange(false)
 
                     }*/
+                    placeholder = { Text("Placeholder text") },
                             value = searchText,
                     onValueChange = {
                         searchText = it
@@ -235,7 +238,9 @@ fun DropdownSection(
                     trailingIcon = {
                         Icon(imageVector = Icons.Default.ArrowDropDown,
                             contentDescription = null,
-                            modifier = Modifier.clickable { onMenuExpandedChange(!isMenuExpanded) },
+                            modifier = Modifier.clickable {
+                                iconButtonClick = true
+                                onMenuExpandedChange(!isMenuExpanded) },
                             tint = colorHelper)
                     },
                     colors = TextFieldDefaults.textFieldColors(
@@ -261,19 +266,24 @@ fun DropdownSection(
                             .clip(RoundedCornerShape(10.dp))
                         // .background(Color.Gray)
                         , // Add padding here
-                        onDismissRequest = { onMenuExpandedChange(false) },
-                      /*  properties = PopupProperties(
-                            focusable = true,
+                        onDismissRequest = {
+                            iconButtonClick = false
+                            filteredSuggestions = ""
+                            onMenuExpandedChange(false) },
+                        properties = PopupProperties(
+                            focusable = false,
                             dismissOnBackPress = true,
                             dismissOnClickOutside = true
-                        )*/
+                        )
                     ) {
-                        filteredSuggestions = items.subList(1, items.size).firstOrNull {
-                            it.startsWith(searchText.text, ignoreCase = true)
-                        }.toString()
+                        if(!iconButtonClick) {
+                            filteredSuggestions = items.subList(1, items.size).firstOrNull {
+                                it.startsWith(searchText.text, ignoreCase = true)
+                            }.toString()
+                        }
 
                         Log.i("dropdown","filter $filteredSuggestions filter null? = ${filteredSuggestions.length}")
-                        if(filteredSuggestions.length >4){
+                        if(filteredSuggestions.length >4 && !iconButtonClick){
 
                             Toast.makeText(context, " $filteredSuggestions", Toast.LENGTH_SHORT).show()
                             DropdownMenuItem(onClick = {
@@ -289,13 +299,16 @@ fun DropdownSection(
                                         fontSize = sz_typo_font_size_frigid,
                                         fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
                                     )
+
                             }
                         }else{
+                            //iconButtonClick = false
                             items.subList(1, items.size).forEach { item ->
                                 DropdownMenuItem(onClick = {
                                     onSelectedValueChange(item)
                                     searchText = TextFieldValue(item)
                                     onMenuExpandedChange(false)
+                                    iconButtonClick = false
                                     Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
                                 }) {
                                     Text(
