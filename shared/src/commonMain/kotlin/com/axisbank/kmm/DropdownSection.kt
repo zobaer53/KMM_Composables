@@ -2,6 +2,7 @@ package com.axisbank.kmm
 
 
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -118,6 +119,7 @@ fun DropdownSection(
     val colorHelper = Color.Gray
     val isHelperEnabled = noPlaceHolder
     var searchText by remember { mutableStateOf(TextFieldValue(selectedValue)) }
+    var filteredSuggestions: String = ""
 
     Column {
         Text(
@@ -179,10 +181,10 @@ fun DropdownSection(
                     modifier = Modifier
                         .padding(end = sz_spacing_glacial)
                         .border(
-                            width = if (isError || isSuccess) 1.dp else 0.dp,
+                            width = 1.dp,
                             color = if (isError) {
                                 colorError
-                            } else if (isSuccess) colorSuccess else Color.Transparent,
+                            } else if (isSuccess) colorSuccess else colorHelper,
                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
                         ).clickable {
                             // Toggle the menu expansion when the box is clicked
@@ -216,12 +218,15 @@ fun DropdownSection(
                         searchText = it
                         // You can filter suggestions based on the entered text here
                         // For example, you can filter items that start with the entered text
-                        val filteredSuggestions = items.subList(1, items.size).filter { suggestion ->
-                            suggestion.startsWith(it.text, ignoreCase = true)
-                        }
+                         filteredSuggestions = items.subList(1, items.size).firstOrNull { suggestion ->
+                             suggestion.startsWith(it.text, ignoreCase = true)
+                         }.toString()
                         // Update the suggestions based on the filtered list
                         // and expand the menu
-                        onMenuExpandedChange(filteredSuggestions.isNotEmpty())
+                        Log.i("dropdown","filter $filteredSuggestions filter null? = ${filteredSuggestions.isBlank()}")
+                                if(filteredSuggestions.length >4 && !isMenuExpanded){
+                                    onMenuExpandedChange(true)
+                                }
                     },
                     textStyle = TextStyle(
                         fontSize = sz_typo_font_size_frigid,
@@ -263,19 +268,43 @@ fun DropdownSection(
                             dismissOnClickOutside = true
                         )*/
                     ) {
-                        items.subList(1, items.size).forEach { item ->
+                        filteredSuggestions = items.subList(1, items.size).firstOrNull {
+                            it.startsWith(searchText.text, ignoreCase = true)
+                        }.toString()
+
+                        Log.i("dropdown","filter $filteredSuggestions filter null? = ${filteredSuggestions.length}")
+                        if(filteredSuggestions.length >4){
+
+                            Toast.makeText(context, " $filteredSuggestions", Toast.LENGTH_SHORT).show()
                             DropdownMenuItem(onClick = {
-                                onSelectedValueChange(item)
-                                searchText = TextFieldValue(item)
+
+                                    onSelectedValueChange(filteredSuggestions)
+
+                                searchText = TextFieldValue( filteredSuggestions )
                                 onMenuExpandedChange(false)
-                                Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Selected $filteredSuggestions", Toast.LENGTH_SHORT).show()
                             }) {
-                                Text(
-                                    text = item,
-                                    fontSize = sz_typo_font_size_frigid,
-                                    fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
-                                )
+                                    Text(
+                                        text = filteredSuggestions,
+                                        fontSize = sz_typo_font_size_frigid,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
+                                    )
                             }
+                        }else{
+                            items.subList(1, items.size).forEach { item ->
+                                DropdownMenuItem(onClick = {
+                                    onSelectedValueChange(item)
+                                    searchText = TextFieldValue(item)
+                                    onMenuExpandedChange(false)
+                                    Toast.makeText(context, "Selected $item", Toast.LENGTH_SHORT).show()
+                                }) {
+                                    Text(
+                                        text = item,
+                                        fontSize = sz_typo_font_size_frigid,
+                                        fontFamily = getStyle().SZ_Typo_Body_Regular_Medium.fontFamily
+                                    )
+                                }
+                        }
                         }
                     }
                 }
