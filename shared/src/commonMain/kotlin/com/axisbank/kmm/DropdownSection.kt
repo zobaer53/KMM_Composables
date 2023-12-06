@@ -175,6 +175,11 @@ fun DropdownSection(
             Box(
                 modifier = Modifier
                     .padding(end = sz_spacing_glacial)
+                    .clickable {
+                        // Toggle the menu expansion when the box is clicked
+                        onMenuExpandedChange(!isMenuExpanded)
+                        iconButtonClick = true
+                    }
             ) {
 
                 TextField(
@@ -187,48 +192,48 @@ fun DropdownSection(
                                 colorError
                             } else if (isSuccess) colorSuccess else colorHelper,
                             shape = RoundedCornerShape(sz_spacing_quickFreeze)
-                        ).clickable {
-                            // Toggle the menu expansion when the box is clicked
-                            onMenuExpandedChange(!isMenuExpanded)
-                            iconButtonClick = false
-                        }
-                      /*  .onFocusChanged {
+                        )
+                        .onFocusChanged {
                             if (it.isFocused) {
                                 // TextField gained focus, expand the menu
-                                onMenuExpandedChange(true)
+                                onMenuExpandedChange(!isMenuExpanded)
+                                iconButtonClick = true
                             }
-                        }*/,
-                   /* keyboardOptions = KeyboardOptions.Default.copy(
+                        },
+                  /*  keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = imeAction
-                    ),
+                    ),*/
                     keyboardActions = KeyboardActions(
                         onDone = {
                             onMenuExpandedChange(false)
                             keyboardController?.hide()
                         }
-                    ),*/
+                    ),
                     isError = isError,
-                /*    value = selectedValueRemembered,
-                    onValueChange = {
-                        selectedValueRemembered = it
-                        onSelectedValueChange(selectedValueRemembered)
-                        onMenuExpandedChange(false)
-
-                    }*/
                     placeholder = { Text("Placeholder text") },
                             value = searchText,
                     onValueChange = {
                         searchText = it
                         // You can filter suggestions based on the entered text here
                         // For example, you can filter items that start with the entered text
-                         filteredSuggestions = items.subList(1, items.size).firstOrNull { suggestion ->
-                             suggestion.startsWith(it.text, ignoreCase = true)
-                         }.toString()
+                        if(it.text.isNotEmpty()) {
+                            filteredSuggestions =
+                                items.subList(1, items.size).firstOrNull { suggestion ->
+                                    suggestion.startsWith(it.text, ignoreCase = true)
+                                }.toString()
+                        }
+                        else{
+                            onMenuExpandedChange(!isMenuExpanded)
+                        }
                         // Update the suggestions based on the filtered list
                         // and expand the menu
                         Log.i("dropdown","filter $filteredSuggestions filter null? = ${filteredSuggestions.isBlank()}")
-                                if(filteredSuggestions.length >4 && !isMenuExpanded){
-                                    onMenuExpandedChange(true)
+                                if(filteredSuggestions.length >4 && !iconButtonClicked &&
+                                    !searchText.text.equals(items[1]) &&
+                                    !searchText.text.equals(items[2]) &&
+                                    !searchText.text.equals(items[3]) &&
+                                    !searchText.text.equals(items[4])){
+                                    onMenuExpandedChange(!isMenuExpanded)
                                 }
                     },
                     textStyle = TextStyle(
@@ -269,14 +274,19 @@ fun DropdownSection(
                         onDismissRequest = {
                             iconButtonClick = false
                             filteredSuggestions = ""
-                            onMenuExpandedChange(false) },
+                            onMenuExpandedChange(false)
+                                           },
                         properties = PopupProperties(
                             focusable = false,
                             dismissOnBackPress = true,
                             dismissOnClickOutside = true
                         )
                     ) {
-                        if(!iconButtonClick) {
+                        if(!iconButtonClick &&
+                            !searchText.text.equals(items[1]) &&
+                            !searchText.text.equals(items[2]) &&
+                            !searchText.text.equals(items[3]) &&
+                            !searchText.text.equals(items[4])) {
                             filteredSuggestions = items.subList(1, items.size).firstOrNull {
                                 it.startsWith(searchText.text, ignoreCase = true)
                             }.toString()
