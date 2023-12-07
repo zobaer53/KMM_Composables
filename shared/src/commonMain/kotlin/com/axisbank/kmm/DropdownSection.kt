@@ -74,6 +74,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -241,7 +244,7 @@ fun DropdownSection(
                         fontFamily = getStyle().SZ_Typo_Body_Regular_Large.fontFamily,
                     ),
                     trailingIcon = {
-                        Icon(imageVector = Icons.Default.ArrowDropDown,
+                        Icon(imageVector = if(!isMenuExpanded || isDisabled) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
                             contentDescription = null,
                             modifier = Modifier.clickable {
                                 iconButtonClick = true
